@@ -21,6 +21,7 @@ public class ProductCardAdapter extends BaseAdapter {
     Context mContext;
 
     public ProductCardAdapter(Context context) {
+        // todo: here you need to populate mItems from the json file
         mContext = context;
         mItems = new ArrayList<Product>();
         for (int i = 1; i < 15; i++){
@@ -45,6 +46,7 @@ public class ProductCardAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+        //todo: update this function properly
         ImageView view = new ImageView(mContext);
         view.setImageResource(R.drawable.ic_launcher);
         Resources r = mContext.getResources();
