@@ -2,15 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="anil.myntratinder.ProductCardViewActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:id="@+id/content">
+        <include
+            layout="@layout/top_action_bar_view"
+            android:id="@+id/bar"></include>
+        </RelativeLayout>
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/splash"
+        android:src="@drawable/splash"
+        android:scaleType="centerCrop"
+        tools:visibility="gone"/>
 </RelativeLayout>
