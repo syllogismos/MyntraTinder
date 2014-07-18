@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/action_row"
+        android:background="#e87625"
+        android:clickable="true">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/background"
+            android:background="#ff460301"/>
+
+        <ImageView
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:id="@+id/right_button"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="2dip"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/circle4_icon_circle_plus"
+            />
+
+        <ImageView
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:id="@+id/left_button"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dip"
+            android:layout_marginTop="2dip"
+            android:padding="10dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/loading_small_gear"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/right_button"
+            android:layout_toRightOf="@id/left_button"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/banner_text"
+                android:text="Myntra Swiper"
+                android:textColor="#ffffff"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#AFFF"
+                android:text="products available to you"
+                android:textSize="16sp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+</RelativeLayout>
