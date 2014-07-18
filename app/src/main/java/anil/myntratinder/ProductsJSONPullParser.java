@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class ProductsJSONPullParser {
 
-    public static List<Product> getProductsFromFile(Context context){
+    public static List<Product> getProductsFromFile(Context context, String filename){
         /* TODO: parse json file and extract products,
          * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
          */
@@ -52,7 +52,7 @@ public class ProductsJSONPullParser {
         String json = null;
         Product product = null;
         try {
-            FileInputStream fis = context.openFileInput("products.json");
+            FileInputStream fis = context.openFileInput(filename);
             int size = fis.available();
             byte[] buffer = new byte[size];
             fis.read(buffer);

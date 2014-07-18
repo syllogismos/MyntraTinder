@@ -32,7 +32,7 @@ public class ProductListViewActivity extends Activity {
             downloadTask.execute();
         } else {
             productListAdapter = new ProductListAdapter(getApplicationContext(), -1,
-                    ProductsJSONPullParser.getProductsFromFile(ProductListViewActivity.this));
+                    ProductsJSONPullParser.getProductsFromFile(ProductListViewActivity.this, "products.json"));
             productListView.setAdapter(productListAdapter);
         }
     }
@@ -61,7 +61,7 @@ public class ProductListViewActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             // super.onPostExecute(aVoid);
             productListAdapter = new ProductListAdapter(ProductListViewActivity.this, -1,
-                    ProductsJSONPullParser.getProductsFromFile(ProductListViewActivity.this));
+                    ProductsJSONPullParser.getProductsFromFile(ProductListViewActivity.this, "products.json"));
             productListView.setAdapter(productListAdapter);
         }
     }
