@@ -49,7 +49,8 @@ public class ProductListViewActivity extends Activity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Downloader.downloadFromUrl("http://", "postdata", openFileOutput("Products.json", Context.MODE_PRIVATE));
+                Downloader.downloadFromUrl("http://", "postdata", openFileOutput("products.json", Context.MODE_PRIVATE));
+                // todo: url, postdata and filename
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
