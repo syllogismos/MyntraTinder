@@ -33,6 +33,10 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public Product(int mId){
+        this.mId = mId;
+    }
+
     public int getmId() {
         return mId;
     }
