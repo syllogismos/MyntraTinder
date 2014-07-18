@@ -5,5 +5,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_product_list_view">ProductListViewActivity</string>
+    <string name="title_activity_product_card_view">ProductCardViewActivity</string>
 
 </resources>

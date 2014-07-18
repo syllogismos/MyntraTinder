@@ -14,7 +14,7 @@
         <activity
             android:name=".MyActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +24,14 @@
         <activity
             android:name=".ProductListViewActivity"
             android:label="@string/title_activity_product_list_view"
+            android:parentActivityName=".MyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MyActivity" />
+        </activity>
+        <activity
+            android:name=".ProductCardViewActivity"
+            android:label="@string/title_activity_product_card_view"
             android:parentActivityName=".MyActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
