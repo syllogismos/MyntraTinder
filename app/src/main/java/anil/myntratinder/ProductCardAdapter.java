@@ -32,6 +32,7 @@ import java.util.List;
 public class ProductCardAdapter extends BaseAdapter {
 
     List<Product> mItems;
+    //todo: should I add @RootContext annotation for mContext below?
     Context mContext;
     ImageLoader imageLoader;
     DisplayImageOptions options;
