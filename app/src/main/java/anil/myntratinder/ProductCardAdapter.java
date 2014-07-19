@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -103,12 +104,15 @@ public class ProductCardAdapter extends BaseAdapter {
         } else {
             singleProductView = (SingleProductView) convertView;
         }
-
-        singleProductView.bind(getItem(position));
+        Product product = getItem(position);
+        singleProductView.bind(product);
 
         ImageView productImage = (ImageView)singleProductView.findViewById(R.id.picture);
         // todo: maybe we need a progressbar when the image is loading?
         // todo: update product_card layout to include discounted price/discount progressbar and etc
+        TextView name = (TextView)singleProductView.findViewById(R.id.name);
+        TextView discountedPrice = (TextView)singleProductView.findViewById(R.id.discountedPrice);
+        TextView actualPrice = (TextView)singleProductView.findViewById(R.id.actualPrice);
 
         ImageLoadingListener listener = new ImageLoadingListener() {
             @Override
@@ -131,7 +135,10 @@ public class ProductCardAdapter extends BaseAdapter {
 
             }
         };
-        imageLoader.displayImage(getItem(position).getImageUrl(), productImage, options, listener);
+        imageLoader.displayImage(product.getImageUrl(), productImage, options, listener);
+        name.setText(product.getName());
+        discountedPrice.setText(product.getPrice());
+        actualPrice.setText(product.getPrice());
 
         return singleProductView;
     }
