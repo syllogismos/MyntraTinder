@@ -30,7 +30,7 @@
                 android:value="MyActivity" />
         </activity>
         <activity
-            android:name=".ProductCardViewActivity"
+            android:name=".ProductCardViewActivity_"
             android:label="@string/title_activity_product_card_view"
             android:parentActivityName=".MyActivity" >
             <meta-data

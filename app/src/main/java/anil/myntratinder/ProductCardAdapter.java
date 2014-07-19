@@ -19,6 +19,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EBean;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.util.List;
 /**
  * Created by Anil on 7/18/2014.
  */
+@EBean
 public class ProductCardAdapter extends BaseAdapter {
 
     List<Product> mItems;
@@ -63,7 +65,7 @@ public class ProductCardAdapter extends BaseAdapter {
     }
 
     @Background
-    private void downloadJsonToFile(String url, String postdata, String filename) {
+    public void downloadJsonToFile(String url, String postdata, String filename) {
         try {
             Downloader.downloadFromUrl(url, postdata, mContext.openFileOutput(filename, Context.MODE_PRIVATE));
         } catch (FileNotFoundException e) {
