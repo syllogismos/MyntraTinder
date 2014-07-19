@@ -96,7 +96,6 @@ public class ProductCardAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        //todo: update this function properly
         SingleProductView singleProductView;
         if (convertView == null) {
             singleProductView = SingleProductView_.build(mContext);
