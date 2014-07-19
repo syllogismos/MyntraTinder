@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.w3c.dom.Text;
 
 /**
  * Created by Anil on 7/18/2014.
@@ -23,6 +24,15 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
 
     @ViewById
     TextView no;
+
+    @ViewById
+    TextView name;
+
+    @ViewById
+    TextView discountedPrice;
+
+    @ViewById
+    TextView actualPrice;
 
     private Product product;
 
@@ -48,17 +58,26 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
         } else {
             no.setAlpha(percent);
         }
+        name.setAlpha(0);
+        actualPrice.setAlpha(0);
+        discountedPrice.setAlpha(0);
     }
 
     @Override
     public void onCancelled(View beingDragged) {
         yes.setAlpha(0);
         no.setAlpha(0);
+        name.setAlpha(1);
+        actualPrice.setAlpha(1);
+        discountedPrice.setAlpha(1);
     }
 
     @Override
     public void onChoiceMade(boolean choice, View beingDragged) {
         yes.setAlpha(0);
         no.setAlpha(0);
+        name.setAlpha(1);
+        actualPrice.setAlpha(1);
+        discountedPrice.setAlpha(1);
     }
 }
