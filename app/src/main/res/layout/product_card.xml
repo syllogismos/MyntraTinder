@@ -10,16 +10,8 @@
         android:layout_height="350dp"
         android:src="@drawable/blank"
         android:scaleType="centerCrop"
-        android:id="@+id/picture"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/id_textView"
-        android:layout_centerInParent="true"
-        tools:text="3"
-        android:textSize="60dp"
-        android:textAppearance="?android:textAppearanceLarge"/>
+        android:id="@+id/picture"
+        tools:src="@drawable/sampleProductImage"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,5 +40,34 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_below="@id/picture"
+        tools:text="Fila Men Grey Unique Casual Shoes"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2000"
+        android:layout_below="@id/name"
+        android:textSize="50dp"
+        android:id="@+id/discountedPrice"
+        android:paddingLeft="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/actualPrice"
+        tools:text="2500"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@id/discountedPrice"
+        android:textSize="30dp"
+        android:textColor="#ff8d4c4f"
+        android:singleLine="false"
+        android:paddingTop="15dp" />
 
 </RelativeLayout>
