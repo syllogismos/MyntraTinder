@@ -13,4 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <!--
+    todo: android.support.v4.widget.SlidingPandLayout
+          android.support.v4.widget.DrawerLayout
+          ImageSwitcher
+    -->
+
 </RelativeLayout>

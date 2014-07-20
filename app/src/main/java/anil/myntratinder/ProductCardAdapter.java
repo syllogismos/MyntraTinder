@@ -3,6 +3,7 @@ package anil.myntratinder;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.TypedValue;
@@ -139,6 +140,7 @@ public class ProductCardAdapter extends BaseAdapter {
         name.setText(product.getName());
         discountedPrice.setText(product.getPrice());
         actualPrice.setText(product.getPrice());
+        actualPrice.setPaintFlags(actualPrice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // http://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
 
         return singleProductView;
     }
