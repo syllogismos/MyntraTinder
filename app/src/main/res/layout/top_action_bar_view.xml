@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/background"
-            android:background="#ff460301"/>
+            android:background="#8da63f2e"/>
 
         <ImageView
             android:layout_width="68dp"
