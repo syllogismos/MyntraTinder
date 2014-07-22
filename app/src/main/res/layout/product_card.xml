@@ -11,7 +11,7 @@
         android:src="@drawable/blank"
         android:scaleType="centerCrop"
         android:id="@+id/picture"
-        tools:src="@drawable/sampleProductImage"/>
+        tools:src="@drawable/sample_product_image"/>
 
     <TextView
         android:layout_width="wrap_content"
