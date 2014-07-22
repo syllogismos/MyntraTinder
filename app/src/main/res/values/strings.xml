@@ -7,5 +7,6 @@
     <string name="title_activity_product_list_view">ProductListViewActivity</string>
     <string name="title_activity_product_card_view">ProductCardViewActivity</string>
     <string name="title_activity_product_detail">ProductDetailActivity</string>
+    <string name="title_activity_drawer_layout">DrawerLayoutActivity</string>
 
 </resources>
