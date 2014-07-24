@@ -38,11 +38,17 @@ public class ProductCardAdapter extends BaseAdapter {
     Context mContext;
     ImageLoader imageLoader;
     DisplayImageOptions options;
+    String mUrl;
+    String mPostData;
+    String mFileName;
 
-    public ProductCardAdapter(Context context) {
+    public ProductCardAdapter(Context context, String url, String postData, String fileName ) {
         // todo: here you need to populate mItems from the json file,
         // should we download the json file here?
         mContext = context;
+        mUrl = url;
+        mPostData = postData;
+        mFileName = fileName;
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext).build();
         imageLoader = ImageLoader.getInstance();
@@ -54,7 +60,7 @@ public class ProductCardAdapter extends BaseAdapter {
                 .build();
 
         if (isNetworkAvailable()){
-            downloadJsonToFile("url", "postdata", "products.json"); // todo: update url, post data here
+            downloadJsonToFile(mUrl, mPostData, mFileName); // todo: build the project and change change ProductCardViewActivity and MensShoesFragment
             mItems = ProductsJSONPullParser.getProductsFromFile(mContext, "products.json");
         } else {
             // todo: notify network isn't available
