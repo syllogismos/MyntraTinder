@@ -9,4 +9,25 @@
     <string name="title_activity_product_detail">ProductDetailActivity</string>
     <string name="title_activity_drawer_layout">DrawerLayoutActivity</string>
 
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Kids</item>
+        <item>Settings</item>
+    </string-array>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_male</item>
+        <item>@drawable/ic_female</item>
+        <item>@drawable/ic_kids</item>
+        <item>@drawable/ic_settings</item>
+    </array>
+
+    <string name="desc_list_item_icon">Item Icon</string>
+
 </resources>
