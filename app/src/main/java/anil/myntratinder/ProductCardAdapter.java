@@ -42,13 +42,11 @@ public class ProductCardAdapter extends BaseAdapter {
     String mPostData;
     String mFileName;
 
-    public ProductCardAdapter(Context context, String url, String postData, String fileName ) {
+    public ProductCardAdapter(Context context) { // todo: android annotations is not allowing the constructor to have more than one parameter, the context...
         // todo: here you need to populate mItems from the json file,
         // should we download the json file here?
         mContext = context;
-        mUrl = url;
-        mPostData = postData;
-        mFileName = fileName;
+
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext).build();
         imageLoader = ImageLoader.getInstance();
@@ -60,7 +58,7 @@ public class ProductCardAdapter extends BaseAdapter {
                 .build();
 
         if (isNetworkAvailable()){
-            downloadJsonToFile(mUrl, mPostData, mFileName); // todo: build the project and change change ProductCardViewActivity and MensShoesFragment
+            downloadJsonToFile("url", "postdata", "filename"); // todo: figure out how to generalize this function, may be rewrite this class without annotations?
             mItems = ProductsJSONPullParser.getProductsFromFile(mContext, "products.json");
         } else {
             // todo: notify network isn't available
