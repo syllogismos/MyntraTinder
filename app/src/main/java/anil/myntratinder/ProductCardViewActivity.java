@@ -65,6 +65,7 @@ public class ProductCardViewActivity extends Activity {
     }
 
     private void doInitialize() {
+        // todo: change getInstance_(this) to getInstance_(this, url, postdata, filename) after building
         mProductStack.setAdapter(ProductCardAdapter_.getInstance_(this));
     }
 
