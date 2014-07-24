@@ -1,13 +1,34 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="anil.myntratinder.MenShoesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:id="@+id/men_shoes_content">
 
-</FrameLayout>
+        <include
+            layout="@layout/top_action_bar_view"
+            android:id="@+id/men_shoes_bar"/>
+
+        <anil.myntratinder.ProductStackView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/men_shoes_mProductStack"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:padding="10dp"
+            android:layout_below="@id/men_shoes_bar"
+            android:layout_margin="0dp">
+        </anil.myntratinder.ProductStackView>
+
+    </RelativeLayout>
+
+    <!-- todo: may be add a progress bar during loading of images
+    -->
+
+</RelativeLayout>
