@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 public class MenShoesFragment extends Fragment {
 
     ProductStackView menShoesStackView;
-    private Handler handler;
+    //private Handler handler;
     public MenShoesFragment() {
 
     }
@@ -21,7 +21,7 @@ public class MenShoesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_men_shoes, container, false);
         menShoesStackView = (ProductStackView) view.findViewById(R.id.men_shoes_mProductStack);
-        handler = new Handler();
+        //handler = new Handler();
         doInitialize();
 
         menShoesStackView.setmProductStackListener(new ProductStackView.ProductStackListener() {
