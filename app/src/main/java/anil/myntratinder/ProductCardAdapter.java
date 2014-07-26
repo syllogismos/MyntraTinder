@@ -57,8 +57,11 @@ public class ProductCardAdapter extends BaseAdapter {
                 .cacheOnDisk(true)
                 .build();
 
+    }
+
+    public void init(String url, String postData, String fileName) {
         if (isNetworkAvailable()){
-            downloadJsonToFile("url", "postdata", "filename"); // todo: figure out how to generalize this function, may be rewrite this class without annotations?
+            downloadJsonToFile(url, postData, fileName); // todo: figure out how to generalize this function, may be rewrite this class without annotations?
             mItems = ProductsJSONPullParser.getProductsFromFile(mContext, "products.json");
         } else {
             // todo: notify network isn't available
