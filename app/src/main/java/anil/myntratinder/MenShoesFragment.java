@@ -50,6 +50,7 @@ public class MenShoesFragment extends Fragment {
     private void doInitialize() {
         //todo: getInstance(context) did some type inference and came up with below statement, don't know if it works
         // todo: add url, postdata, filename parameters after figuring out how to generalize it.
+        // todo: change this.getActivity().getBaseContext() to getActivity() if things don't work
         menShoesStackView.setAdapter(ProductCardAdapter_.getInstance_(this.getActivity().getBaseContext()));
     }
 }
