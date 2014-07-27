@@ -1,17 +1,14 @@
 package anil.myntratinder;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -38,9 +35,6 @@ public class ProductCardAdapter extends BaseAdapter {
     Context mContext;
     ImageLoader imageLoader;
     DisplayImageOptions options;
-    String mUrl;
-    String mPostData;
-    String mFileName;
 
     public ProductCardAdapter(Context context) { // todo: android annotations is not allowing the constructor to have more than one parameter, the context...
         // todo: here you need to populate mItems from the json file,

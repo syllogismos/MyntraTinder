@@ -3,7 +3,6 @@ package anil.myntratinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,8 +11,6 @@ import android.view.View;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-
-import anil.myntratinder.R;
 
 @EActivity(R.layout.activity_product_card_view)
 public class ProductCardViewActivity extends Activity {

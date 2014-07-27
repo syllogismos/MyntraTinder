@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import anil.myntratinder.R;
 
 public class ProductDetailActivity extends Activity {
 
