@@ -1,4 +1,4 @@
-package anil.myntratinder;
+package anil.myntratinder.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,6 +23,13 @@ import org.androidannotations.annotations.EBean;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
+import anil.myntratinder.R;
+import anil.myntratinder.views.SingleProductView;
+import anil.myntratinder.views.SingleProductView_;
+import anil.myntratinder.models.Product;
+import anil.myntratinder.utils.Downloader;
+import anil.myntratinder.utils.ProductsJSONPullParser;
 
 /**
  * Created by Anil on 7/18/2014.

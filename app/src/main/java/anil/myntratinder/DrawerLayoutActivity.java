@@ -17,9 +17,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import anil.myntratinder.R;
-import anil.myntratinder.adapter.NavDrawerListAdapter;
-import anil.myntratinder.model.NavDrawerItem;
+import anil.myntratinder.adapters.NavDrawerListAdapter;
+import anil.myntratinder.models.NavDrawerItem;
 
 public class DrawerLayoutActivity extends Activity {
 

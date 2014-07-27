@@ -1,4 +1,4 @@
-package anil.myntratinder;
+package anil.myntratinder.utils;
 
 import android.content.Context;
 
@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import anil.myntratinder.models.Product;
 
 /**
  * Created by Anil on 7/18/2014.

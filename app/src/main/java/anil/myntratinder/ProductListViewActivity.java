@@ -12,6 +12,10 @@ import android.widget.ListView;
 
 import java.io.FileNotFoundException;
 
+import anil.myntratinder.adapters.ProductListAdapter;
+import anil.myntratinder.utils.Downloader;
+import anil.myntratinder.utils.ProductsJSONPullParser;
+
 public class ProductListViewActivity extends Activity {
 
     private ProductListAdapter productListAdapter;

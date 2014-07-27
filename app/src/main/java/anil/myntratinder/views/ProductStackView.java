@@ -1,4 +1,4 @@
-package anil.myntratinder;
+package anil.myntratinder.views;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import anil.myntratinder.R;
 
 /**
  * Created by Anil on 7/18/2014.

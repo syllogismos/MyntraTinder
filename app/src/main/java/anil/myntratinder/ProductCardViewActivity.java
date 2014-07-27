@@ -12,6 +12,11 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import anil.myntratinder.adapters.ProductCardAdapter_;
+import anil.myntratinder.adapters.ProductCardAdapter;
+import anil.myntratinder.views.ProductStackView;
+import anil.myntratinder.views.SingleProductView;
+
 @EActivity(R.layout.activity_product_card_view)
 public class ProductCardViewActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package anil.myntratinder;
+package anil.myntratinder.views;
 
 import android.content.Context;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+
+import anil.myntratinder.R;
+import anil.myntratinder.models.Product;
 
 /**
  * Created by Anil on 7/18/2014.

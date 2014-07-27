@@ -1,4 +1,4 @@
-package anil.myntratinder;
+package anil.myntratinder.models;
 
 /**
  * Created by Anil on 7/17/2014.

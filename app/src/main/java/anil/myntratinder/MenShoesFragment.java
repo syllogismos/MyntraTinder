@@ -6,6 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import anil.myntratinder.adapters.ProductCardAdapter_;
+import anil.myntratinder.adapters.ProductCardAdapter;
+import anil.myntratinder.views.ProductStackView;
+import anil.myntratinder.views.SingleProductView;
+
 
 public class MenShoesFragment extends Fragment {
 

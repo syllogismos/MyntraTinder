@@ -1,4 +1,4 @@
-package anil.myntratinder.adapter;
+package anil.myntratinder.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import anil.myntratinder.R;
-import anil.myntratinder.model.NavDrawerItem;
+import anil.myntratinder.models.NavDrawerItem;
 
 /**
  * Created by Anil on 7/24/2014.
