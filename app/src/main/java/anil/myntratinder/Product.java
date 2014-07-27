@@ -4,6 +4,9 @@ package anil.myntratinder;
  * Created by Anil on 7/17/2014.
  */
 public class Product {
+    //fixme: update properties of Product, add required properties and remove useless ones like mIndex;
+    // discount, discounted price, actual price, image url.. etc, unique id
+    // remove mId, mIndex;
     private int mId;
     private int mIndex;
     private String name;

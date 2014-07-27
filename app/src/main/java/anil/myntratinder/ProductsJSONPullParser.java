@@ -43,7 +43,7 @@ import java.util.List;
 public class ProductsJSONPullParser {
 
     public static List<Product> getProductsFromFile(Context context, String filename){
-        /* TODO: parse json file and extract products,
+        /* todo: check if the we are parsing the json properly. extract extra info for each property if needed
          * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
          */
         List<Product> products = new ArrayList<Product>();

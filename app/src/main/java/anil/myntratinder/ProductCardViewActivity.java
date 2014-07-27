@@ -62,8 +62,8 @@ public class ProductCardViewActivity extends Activity {
     }
 
     private void doInitialize() {
-        // todo: change getInstance_(this) to getInstance_(this, url, postdata, filename) after building, figure out how to put url, postdata, and filename..
-        ProductCardAdapter_ mAdapter = ProductCardAdapter_.getInstance_(this);
+        ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(this);
+        // fixme: add proper url, postdata, filename for this to work
         mAdapter.init("url", "postdata", "filename");
         mProductStack.setAdapter(ProductCardAdapter_.getInstance_(this));
     }

@@ -31,14 +31,13 @@ import java.util.List;
 public class ProductCardAdapter extends BaseAdapter {
 
     List<Product> mItems;
-    //todo: should I add @RootContext annotation for mContext below?
+    //fixme: should I add @RootContext annotation for mContext below?
     Context mContext;
     ImageLoader imageLoader;
     DisplayImageOptions options;
 
-    public ProductCardAdapter(Context context) { // todo: android annotations is not allowing the constructor to have more than one parameter, the context...
-        // todo: here you need to populate mItems from the json file,
-        // should we download the json file here?
+    public ProductCardAdapter(Context context) {
+        // fixme: should we download the json file here?
         mContext = context;
 
 
@@ -54,11 +53,15 @@ public class ProductCardAdapter extends BaseAdapter {
     }
 
     public void init(String url, String postData, String fileName) {
+        // fixme: for generalizing for diff url, postdata, filename, I wrote a new method init,
+        // so after instantiating the adapter, you have to do mAdapter.init(url, data, filename)
         if (isNetworkAvailable()){
-            downloadJsonToFile(url, postData, fileName); // todo: figure out how to generalize this function, may be rewrite this class without annotations?
+            downloadJsonToFile(url, postData, fileName);
             mItems = ProductsJSONPullParser.getProductsFromFile(mContext, "products.json");
         } else {
             // todo: notify network isn't available
+            // fixme: here we are loading the same random product 15 times,
+            // instead you have to load the images from the already downloaded file.
             mItems = new ArrayList<Product>();
             for (int i = 1; i < 15; i++){
                 Product p = new Product(i);
@@ -111,7 +114,6 @@ public class ProductCardAdapter extends BaseAdapter {
 
         ImageView productImage = (ImageView)singleProductView.findViewById(R.id.picture);
         // todo: maybe we need a progressbar when the image is loading?
-        // todo: update product_card layout to include discounted price/discount progressbar and etc
         TextView name = (TextView)singleProductView.findViewById(R.id.name);
         TextView discountedPrice = (TextView)singleProductView.findViewById(R.id.discountedPrice);
         TextView actualPrice = (TextView)singleProductView.findViewById(R.id.actualPrice);
@@ -139,6 +141,8 @@ public class ProductCardAdapter extends BaseAdapter {
         };
         imageLoader.displayImage(product.getImageUrl(), productImage, options, listener);
         name.setText(product.getName());
+        //todo: update Product class to add additional properties like discounted price, discount, actual price
+        //fixme: here we used product.getPrice() for everything, fix this.
         discountedPrice.setText(product.getPrice());
         actualPrice.setText(product.getPrice());
         actualPrice.setPaintFlags(actualPrice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // http://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
