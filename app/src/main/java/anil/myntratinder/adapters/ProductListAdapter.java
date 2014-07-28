@@ -50,7 +50,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         RelativeLayout row = (RelativeLayout)convertView;
         if (row == null) {
             LayoutInflater inflater =(LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            inflater.inflate(R.layout.row_product, null);
+            row = (RelativeLayout)inflater.inflate(R.layout.row_product, null);
         }
 
         final ImageView productImage = (ImageView)row.findViewById(R.id.productImage);
