@@ -60,6 +60,7 @@ public class ProductCardViewActivity extends Activity {
             public void onChoiceMade(boolean choice, View beingDragged) {
                 SingleProductView item = (SingleProductView)beingDragged;
                 item.onChoiceMade(choice, beingDragged);
+                //todo: here is where you have to handle what happens after you select yes or no to a particular card
             }
         });
 
