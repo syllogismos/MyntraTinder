@@ -129,7 +129,7 @@ public class DrawerLayoutActivity extends Activity {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new HomeFragment();
+                fragment = new sampleFragment();
                 break;
             case 2:
                 fragment = new HomeFragment();
