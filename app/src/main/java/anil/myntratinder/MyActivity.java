@@ -1,6 +1,7 @@
 package anil.myntratinder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +20,8 @@ public class MyActivity extends Activity {
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent listActivityIntent = new Intent(getBaseContext(),ProductListViewActivity.class);
+                startActivity(listActivityIntent);
             }
         });
 
@@ -27,7 +29,8 @@ public class MyActivity extends Activity {
         cardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent cardActivityIntent = new Intent(getBaseContext(), ProductCardViewActivity_.class);
+                startActivity(cardActivityIntent);
             }
         });
 
@@ -35,7 +38,8 @@ public class MyActivity extends Activity {
         drawerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent drawerActivityIntent = new Intent(getBaseContext(), DrawerLayoutActivity.class);
+                startActivity(drawerActivityIntent);
             }
         });
     }
