@@ -106,6 +106,8 @@ public class DrawerLayoutActivity extends Activity {
             displayView(0);
         }
 
+        mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
+
     }
 
     private class SlideMenuClickListener implements ListView.OnItemClickListener{
@@ -161,11 +163,13 @@ public class DrawerLayoutActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
 
     @Override
@@ -175,6 +179,8 @@ public class DrawerLayoutActivity extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -190,10 +196,14 @@ public class DrawerLayoutActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (mDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
