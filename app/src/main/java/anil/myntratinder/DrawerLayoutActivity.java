@@ -67,6 +67,7 @@ public class DrawerLayoutActivity extends Activity {
 
         mDrawerList.setAdapter(adapter);
 
+        //todo: fix action bar, we need it..
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         //getActionBar().setHomeButtonEnabled(true);
 
@@ -156,9 +157,6 @@ public class DrawerLayoutActivity extends Activity {
             Log.e("drawer layout activity", "error in creating fragment");
         }
     }
-
-    // todo: Override methods onPrepareOptionsMenu, setTitle, onPostCreate, onConfigurationChanged
-
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
