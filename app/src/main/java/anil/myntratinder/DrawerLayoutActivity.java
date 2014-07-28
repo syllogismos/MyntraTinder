@@ -67,8 +67,8 @@ public class DrawerLayoutActivity extends Activity {
 
         mDrawerList.setAdapter(adapter);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer,
@@ -84,7 +84,7 @@ public class DrawerLayoutActivity extends Activity {
              */
             @Override
             public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(mDrawerTitle);
+                //getActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu();
             }
 
@@ -97,7 +97,7 @@ public class DrawerLayoutActivity extends Activity {
              */
             @Override
             public void onDrawerClosed(View drawerView) {
-                getActionBar().setTitle(mTitle);
+                //getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
         };
