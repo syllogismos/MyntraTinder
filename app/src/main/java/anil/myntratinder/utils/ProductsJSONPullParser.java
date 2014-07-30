@@ -65,6 +65,11 @@ public class ProductsJSONPullParser {
                 for (int i = 0; i < productObjects.length(); i++) {
                     JSONObject p = productObjects.getJSONObject(i);
                     product = new Product(i);
+                    product.setDiscount(p.getString("discount"));
+                    product.setPrice(p.getString("price"));
+                    product.setStyleId(p.getString("styleid"));
+                    product.setDreDiscountLabel(p.getString("dre_discount_label"));
+                    product.setDreLandingPageUrl(p.getString("dre_landing_page_url"));
                     product.setImageUrl(p.getString("search_image"));
                     product.setDiscountedPrice(p.getString("discounted_price"));
                     product.setStyleName(p.getString("stylename"));
