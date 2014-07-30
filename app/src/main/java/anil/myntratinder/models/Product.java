@@ -46,23 +46,6 @@ public class Product {
         return styleName;
     }
 
-    public Product(int mId, int mIndex, String styleName, String discountedPrice, String imageUrl, String description) {
-        this.mId = mId;
-        this.mIndex = mIndex;
-        this.styleName = styleName;
-        this.discountedPrice = discountedPrice;
-        this.imageUrl = imageUrl;
-        this.description = description;
-    }
-
-    public Product(int mId, String styleName, int mIndex, String discountedPrice, String imageUrl) {
-        this.mId = mId;
-        this.styleName = styleName;
-        this.mIndex = mIndex;
-        this.discountedPrice = discountedPrice;
-        this.imageUrl = imageUrl;
-    }
-
     public Product(int mId){
         this.mId = mId;
     }
