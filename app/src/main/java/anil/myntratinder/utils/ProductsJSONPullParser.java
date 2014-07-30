@@ -89,4 +89,25 @@ public class ProductsJSONPullParser {
         }
         return products;
     }
+
+
+    // todo: get image url from imageEntry_default, you can control the image quality
+    // if you parse imageEntry_default you can get image details like relativePath, supportedResolutions, domain, path, resolutionFormula, securedDomain etc
+    // fixme: instead of returning String return the JSONObject json here,
+    // add additional properties to Product model like relativePath, domain etc for image for now just use search_image
+    // product.setImageUrl(getImageUrlFromJson(p.getString("imageEntry_default")));
+    public static String getImageUrlFromJson(String imageEntry_default){
+        String imageUrl = "";
+        try {
+            if (imageEntry_default != null){
+                JSONObject json = new JSONObject(imageEntry_default);
+                imageUrl = json.getString("path");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return imageUrl;
+    }
+
+
 }
