@@ -14,10 +14,38 @@ import anil.myntratinder.views.SingleProductView;
 
 public class MenShoesFragment extends Fragment {
 
+    private static final String ARG_URL = "url";
+    private static final String ARG_POSTDATA = "postData";
+    private static final String ARG_FILENAME = "fileName";
+
+    private String mUrl;
+    private String mPostData;
+    private String mFileName;
+
     ProductStackView menShoesStackView;
     //private Handler handler;
     public MenShoesFragment() {
 
+    }
+
+    public static MenShoesFragment newInstance(String url, String postData, String fileName){
+        MenShoesFragment fragment = new MenShoesFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_URL, url);
+        args.putString(ARG_POSTDATA, postData);
+        args.putString(ARG_FILENAME, fileName);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null){
+            mUrl = getArguments().getString(ARG_URL);
+            mPostData = getArguments().getString(ARG_POSTDATA);
+            mFileName = getArguments().getString(ARG_FILENAME);
+        }
     }
 
     @Override
@@ -56,7 +84,7 @@ public class MenShoesFragment extends Fragment {
         // todo: getInstance(context) did some type inference and came up with below statement, don't know if it works
         // todo: getActivity() or this.getActivity().getBaseContext()
         ProductCardAdapter mCardAdapter = ProductCardAdapter_.getInstance_(getActivity());
-        mCardAdapter.init("url", "postData", "filename");
+        mCardAdapter.init(mUrl, mPostData, mFileName);
         menShoesStackView.setAdapter(mCardAdapter);
     }
 }
