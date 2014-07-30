@@ -35,11 +35,9 @@ public class Product {
     // discount, discounted price, actual price, image url.. etc, unique id
     // remove mId, mIndex;
     private int mId;
-    private int mIndex;
     private String styleName;
     private String discountedPrice;
     private String imageUrl;
-    private String description;
 
     @Override
     public String toString() {
@@ -56,14 +54,6 @@ public class Product {
 
     public void setmId(int mId) {
         this.mId = mId;
-    }
-
-    public int getmIndex() {
-        return mIndex;
-    }
-
-    public void setmIndex(int mIndex) {
-        this.mIndex = mIndex;
     }
 
     public String getStyleName() {
@@ -88,13 +78,5 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
