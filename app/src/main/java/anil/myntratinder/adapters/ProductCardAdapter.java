@@ -148,8 +148,8 @@ public class ProductCardAdapter extends BaseAdapter {
         //todo: update Product class to add additional properties like discounted price, discount, actual price
         //fixme: here we used product.getPrice() for everything, fix this.
         discountedPrice.setText(product.getDiscountedPrice());
-        actualPrice.setText(product.getDiscountedPrice());
-        actualPrice.setPaintFlags(actualPrice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // http://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
+        actualPrice.setText(product.getPrice());
+        actualPrice.setPaintFlags(actualPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG); // http://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
 
         return singleProductView;
     }

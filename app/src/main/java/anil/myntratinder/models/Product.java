@@ -38,7 +38,6 @@ public class Product {
     private String styleName;
     private String discountedPrice;
     private String discount;
-    private String dreDiscountLabel;
     private String price;
     private String styleId;
     private String imageUrl;
@@ -50,14 +49,6 @@ public class Product {
 
     public void setDiscount(String discount) {
         this.discount = discount;
-    }
-
-    public String getDreDiscountLabel() {
-        return dreDiscountLabel;
-    }
-
-    public void setDreDiscountLabel(String dreDiscountLabel) {
-        this.dreDiscountLabel = dreDiscountLabel;
     }
 
     public String getPrice() {
