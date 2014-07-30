@@ -28,7 +28,7 @@
 
     </RelativeLayout>
 
-    <!-- todo: may be add a progress bar during loading of images
+    <!-- todo: may be add a progress bar during loading of images and a button to click to load more images.
     -->
 
 </RelativeLayout>

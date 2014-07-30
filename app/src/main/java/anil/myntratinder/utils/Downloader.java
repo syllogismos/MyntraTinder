@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
  *
  * helper class that helps in downloading from a given url, and raw post data to a local file
  * http://stackoverflow.com/questions/15802977/how-to-send-raw-data-from-android-http-post-request
- * TODO: check if the above method of sending post request with raw data works or not.
+ *
  */
 public class Downloader {
     private static String myTag = "downloader";

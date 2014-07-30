@@ -124,9 +124,7 @@ public class DrawerLayoutActivity extends Activity {
     }
 
     private void displayView(int position) {
-        // todo: replace each fragment with the respective one
-        // todo: and figure out how to initialize different fragments with the same fragment class.
-        // say menshoes = Fragment.init(url, data, filename); and etc
+        // fixme: replace each fragment with the respective one
         Fragment fragment = null;
         switch (position){
             case 0:

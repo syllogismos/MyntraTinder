@@ -14,9 +14,7 @@
         android:layout_height="wrap_content" />
 
     <!--
-    todo: android.support.v4.widget.SlidingPandLayout
-          android.support.v4.widget.DrawerLayout
-          ImageSwitcher
+    todo: android.support.v4.widget.SlidingPandLayout or ImageSwitcher or flipView
     -->
 
 </RelativeLayout>

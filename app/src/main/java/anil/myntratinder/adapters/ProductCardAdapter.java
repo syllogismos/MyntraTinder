@@ -60,19 +60,16 @@ public class ProductCardAdapter extends BaseAdapter {
     }
 
     public void init(String url, String postData, String fileName) {
-        // fixme: for generalizing for diff url, postdata, filename, I wrote a new method init,
-        // so after instantiating the adapter, you have to do mAdapter.init(url, data, filename)
         if (isNetworkAvailable()){
             downloadJsonToFile(url, postData, fileName);
             mItems = ProductsJSONPullParser.getProductsFromFile(mContext, "products.json");
         } else {
-            // todo: notify network isn't available
+            // fixme: figure out what happens when network is not available
             // fixme: here we are loading the same random product 15 times,
-            // instead you have to load the images from the already downloaded file.
             mItems = new ArrayList<Product>();
             for (int i = 1; i < 15; i++){
                 Product p = new Product(i);
-                p.setImageUrl("sampleImageurl"); //todo: add sample image url here
+                p.setImageUrl("sampleImageurl"); //fixme: add sample image url here
                 mItems.add(p);
             }
         }
@@ -120,7 +117,7 @@ public class ProductCardAdapter extends BaseAdapter {
         singleProductView.bind(product);
 
         ImageView productImage = (ImageView)singleProductView.findViewById(R.id.picture);
-        // todo: maybe we need a progressbar when the image is loading?
+        // fixme: maybe we need a progressbar when the image is loading?
         TextView name = (TextView)singleProductView.findViewById(R.id.name);
         TextView discountedPrice = (TextView)singleProductView.findViewById(R.id.discountedPrice);
         TextView actualPrice = (TextView)singleProductView.findViewById(R.id.actualPrice);

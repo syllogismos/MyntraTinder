@@ -37,6 +37,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     TextView actualPrice;
 
     private Product product;
+    // todo: can we make Product public to access from outside while overriding onChoiceMade, onCancelled etc
 
     public SingleProductView(Context context) {
         super(context);
@@ -50,7 +51,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        // todo: you can download the picture here or in the getView function of the ProductCardAdapter, figure out whats best.
+        // todo: you can download the picture here or in the getView function of the ProductCardAdapter, for now things work so, i'm happy
     }
 
     @Override
@@ -81,5 +82,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
         name.setAlpha(1);
         actualPrice.setAlpha(1);
         discountedPrice.setAlpha(1);
+        // fixme: here you have to do what happens after the choice is made,
+        // todo: can we make Product public in the main class..?
     }
 }

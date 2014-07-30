@@ -73,7 +73,6 @@ public class ProductCardViewActivity extends Activity {
 
     private void doInitialize() {
         ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(this);
-        // fixme: add proper url, postdata, filename for this to work
         mAdapter.init(url, postData, fileName);
         mProductStack.setAdapter(mAdapter);
     }

@@ -81,8 +81,6 @@ public class MenShoesFragment extends Fragment {
     }
 
     private void doInitialize() {
-        // todo: getInstance(context) did some type inference and came up with below statement, don't know if it works
-        // todo: getActivity() or this.getActivity().getBaseContext()
         ProductCardAdapter mCardAdapter = ProductCardAdapter_.getInstance_(getActivity());
         mCardAdapter.init(mUrl, mPostData, mFileName);
         menShoesStackView.setAdapter(mCardAdapter);
