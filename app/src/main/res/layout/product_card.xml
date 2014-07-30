@@ -44,7 +44,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/name"
+        android:id="@+id/styleName"
         android:layout_below="@id/picture"
         tools:text="Fila Men Grey Unique Casual Shoes"
         android:textSize="25dp"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="2000"
-        android:layout_below="@id/name"
+        android:layout_below="@id/styleName"
         android:textSize="50dp"
         android:id="@+id/discountedPrice"
         android:paddingLeft="10dp"/>
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/actualPrice"
         tools:text="2500"
-        android:layout_below="@id/name"
+        android:layout_below="@id/styleName"
         android:layout_toRightOf="@id/discountedPrice"
         android:textSize="30dp"
         android:textColor="#ff8d4c4f"

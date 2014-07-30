@@ -28,7 +28,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     TextView no;
 
     @ViewById
-    TextView name;
+    TextView styleName;
 
     @ViewById
     TextView discountedPrice;
@@ -61,7 +61,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
         } else {
             no.setAlpha(percent);
         }
-        name.setAlpha(0);
+        styleName.setAlpha(0);
         actualPrice.setAlpha(0);
         discountedPrice.setAlpha(0);
     }
@@ -70,7 +70,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     public void onCancelled(View beingDragged) {
         yes.setAlpha(0);
         no.setAlpha(0);
-        name.setAlpha(1);
+        styleName.setAlpha(1);
         actualPrice.setAlpha(1);
         discountedPrice.setAlpha(1);
     }
@@ -79,7 +79,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     public void onChoiceMade(boolean choice, View beingDragged) {
         yes.setAlpha(0);
         no.setAlpha(0);
-        name.setAlpha(1);
+        styleName.setAlpha(1);
         actualPrice.setAlpha(1);
         discountedPrice.setAlpha(1);
         // fixme: here you have to do what happens after the choice is made,

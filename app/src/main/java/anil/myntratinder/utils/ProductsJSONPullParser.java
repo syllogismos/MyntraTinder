@@ -67,7 +67,7 @@ public class ProductsJSONPullParser {
                     product = new Product(i);
                     product.setImageUrl(p.getString("search_image"));
                     product.setPrice(p.getString("discounted_price"));
-                    product.setName(p.getString("product"));
+                    product.setStyleName(p.getString("stylename"));
                     products.add(product);
                     /*
                      * todo: get image url from the json object imageEntry_default, rather than search_image

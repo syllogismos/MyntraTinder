@@ -118,7 +118,7 @@ public class ProductCardAdapter extends BaseAdapter {
 
         ImageView productImage = (ImageView)singleProductView.findViewById(R.id.picture);
         // fixme: maybe we need a progressbar when the image is loading?
-        TextView name = (TextView)singleProductView.findViewById(R.id.name);
+        TextView styleName = (TextView)singleProductView.findViewById(R.id.styleName);
         TextView discountedPrice = (TextView)singleProductView.findViewById(R.id.discountedPrice);
         TextView actualPrice = (TextView)singleProductView.findViewById(R.id.actualPrice);
 
@@ -144,7 +144,7 @@ public class ProductCardAdapter extends BaseAdapter {
             }
         };
         imageLoader.displayImage(product.getImageUrl(), productImage, options, listener);
-        name.setText(product.getName());
+        styleName.setText(product.getStyleName());
         //todo: update Product class to add additional properties like discounted price, discount, actual price
         //fixme: here we used product.getPrice() for everything, fix this.
         discountedPrice.setText(product.getPrice());

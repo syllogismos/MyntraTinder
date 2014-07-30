@@ -36,28 +36,28 @@ public class Product {
     // remove mId, mIndex;
     private int mId;
     private int mIndex;
-    private String name;
+    private String styleName;
     private String price;
     private String imageUrl;
     private String description;
 
     @Override
     public String toString() {
-        return name;
+        return styleName;
     }
 
-    public Product(int mId, int mIndex, String name, String price, String imageUrl, String description) {
+    public Product(int mId, int mIndex, String styleName, String price, String imageUrl, String description) {
         this.mId = mId;
         this.mIndex = mIndex;
-        this.name = name;
+        this.styleName = styleName;
         this.price = price;
         this.imageUrl = imageUrl;
         this.description = description;
     }
 
-    public Product(int mId, String name, int mIndex, String price, String imageUrl) {
+    public Product(int mId, String styleName, int mIndex, String price, String imageUrl) {
         this.mId = mId;
-        this.name = name;
+        this.styleName = styleName;
         this.mIndex = mIndex;
         this.price = price;
         this.imageUrl = imageUrl;
@@ -83,12 +83,12 @@ public class Product {
         this.mIndex = mIndex;
     }
 
-    public String getName() {
-        return name;
+    public String getStyleName() {
+        return styleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
     }
 
     public String getPrice() {
