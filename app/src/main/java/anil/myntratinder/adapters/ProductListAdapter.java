@@ -86,7 +86,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 
         imageLoader.displayImage(getItem(position).getImageUrl(),productImage, options, listener);
         productName.setText(getItem(position).getStyleName());
-        productPrice.setText(getItem(position).getPrice());
+        productPrice.setText(getItem(position).getDiscountedPrice());
 
         return row;
     }

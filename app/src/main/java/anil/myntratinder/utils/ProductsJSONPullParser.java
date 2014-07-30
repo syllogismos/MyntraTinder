@@ -66,7 +66,7 @@ public class ProductsJSONPullParser {
                     JSONObject p = productObjects.getJSONObject(i);
                     product = new Product(i);
                     product.setImageUrl(p.getString("search_image"));
-                    product.setPrice(p.getString("discounted_price"));
+                    product.setDiscountedPrice(p.getString("discounted_price"));
                     product.setStyleName(p.getString("stylename"));
                     products.add(product);
                     /*

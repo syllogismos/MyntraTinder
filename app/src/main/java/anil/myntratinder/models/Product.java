@@ -37,7 +37,7 @@ public class Product {
     private int mId;
     private int mIndex;
     private String styleName;
-    private String price;
+    private String discountedPrice;
     private String imageUrl;
     private String description;
 
@@ -46,20 +46,20 @@ public class Product {
         return styleName;
     }
 
-    public Product(int mId, int mIndex, String styleName, String price, String imageUrl, String description) {
+    public Product(int mId, int mIndex, String styleName, String discountedPrice, String imageUrl, String description) {
         this.mId = mId;
         this.mIndex = mIndex;
         this.styleName = styleName;
-        this.price = price;
+        this.discountedPrice = discountedPrice;
         this.imageUrl = imageUrl;
         this.description = description;
     }
 
-    public Product(int mId, String styleName, int mIndex, String price, String imageUrl) {
+    public Product(int mId, String styleName, int mIndex, String discountedPrice, String imageUrl) {
         this.mId = mId;
         this.styleName = styleName;
         this.mIndex = mIndex;
-        this.price = price;
+        this.discountedPrice = discountedPrice;
         this.imageUrl = imageUrl;
     }
 
@@ -91,12 +91,12 @@ public class Product {
         this.styleName = styleName;
     }
 
-    public String getPrice() {
-        return price;
+    public String getDiscountedPrice() {
+        return discountedPrice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setDiscountedPrice(String discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 
     public String getImageUrl() {
