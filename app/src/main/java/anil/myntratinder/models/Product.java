@@ -37,7 +37,52 @@ public class Product {
     private int mId;
     private String styleName;
     private String discountedPrice;
+    private String discount;
+    private String dreDiscountLabel;
+    private String price;
+    private String styleId;
     private String imageUrl;
+    private String dreLandingPageUrl;
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public String getDreDiscountLabel() {
+        return dreDiscountLabel;
+    }
+
+    public void setDreDiscountLabel(String dreDiscountLabel) {
+        this.dreDiscountLabel = dreDiscountLabel;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(String styleId) {
+        this.styleId = styleId;
+    }
+
+    public String getDreLandingPageUrl() {
+        return dreLandingPageUrl;
+    }
+
+    public void setDreLandingPageUrl(String dreLandingPageUrl) {
+        this.dreLandingPageUrl = dreLandingPageUrl;
+    }
 
     @Override
     public String toString() {
