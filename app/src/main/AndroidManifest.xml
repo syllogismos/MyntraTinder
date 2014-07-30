@@ -44,7 +44,8 @@
         <activity
             android:name=".DrawerLayoutActivity"
             android:label="@string/title_activity_drawer_layout"
-            android:parentActivityName=".MyActivity" >
+            android:parentActivityName=".MyActivity"
+            android:theme="@style/AppThemeWithActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MyActivity" />

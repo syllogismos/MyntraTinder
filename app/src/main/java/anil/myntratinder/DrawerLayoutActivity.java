@@ -72,8 +72,8 @@ public class DrawerLayoutActivity extends Activity {
         mDrawerList.setAdapter(adapter);
 
         //todo: fix action bar, we need it..
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer,
@@ -89,7 +89,7 @@ public class DrawerLayoutActivity extends Activity {
              */
             @Override
             public void onDrawerOpened(View drawerView) {
-                //getActionBar().setTitle(mDrawerTitle);
+                getActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu();
             }
 
@@ -102,7 +102,7 @@ public class DrawerLayoutActivity extends Activity {
              */
             @Override
             public void onDrawerClosed(View drawerView) {
-                //getActionBar().setTitle(mTitle);
+                getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
         };
@@ -174,7 +174,8 @@ public class DrawerLayoutActivity extends Activity {
 
     @Override
     public void setTitle(CharSequence title) {
-        super.setTitle(title);
+        mTitle = title;
+        getActionBar().setTitle(mTitle);
     }
 
     @Override
