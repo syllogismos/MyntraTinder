@@ -198,6 +198,8 @@ public class ProductStackView extends RelativeLayout{
 
     private void initializeStack() {
         int position = 0;
+        // fixme: possible fix for the unusual error of the 4th product repeating, mCurrentPosition + STACK_SIZE -1 or
+        // fixme: mCurrentPosition += position instead of position - 1, in the end of this function
         for (; position < mCurrentPosition + STACK_SIZE; position++){
             if (position >= mAdapter.getCount())
                 break;
