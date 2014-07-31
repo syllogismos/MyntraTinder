@@ -36,8 +36,7 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     @ViewById
     TextView actualPrice;
 
-    private Product product;
-    // todo: can we make Product public to access from outside while overriding onChoiceMade, onCancelled etc
+    public Product product;
 
     public SingleProductView(Context context) {
         super(context);
