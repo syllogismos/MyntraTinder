@@ -42,6 +42,15 @@ public class Product {
     private String styleId;
     private String imageUrl;
     private String dreLandingPageUrl;
+    private boolean liked;
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
 
     public String getDiscount() {
         return discount;
