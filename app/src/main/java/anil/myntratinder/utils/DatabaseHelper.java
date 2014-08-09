@@ -1,8 +1,11 @@
 package anil.myntratinder.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import anil.myntratinder.models.Product;
 
 /**
  * Created by Anil on 8/7/2014.
@@ -53,5 +56,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_WOMEN_SHOES);
 
         onCreate(sqLiteDatabase);
+    }
+
+    public long insertNewProduct(Product product, String table) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        // values.put(KEY_ID, product.getmId());
+        values.put(KEY_STYLE_NAME, product.getStyleId());
+        values.put(KEY_DISCOUNTED_PRICE, product.getDiscountedPrice());
+
+        long product_id = db.insert(table, null, values);
+        return product_id;
     }
 }
