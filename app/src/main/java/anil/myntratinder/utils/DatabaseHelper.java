@@ -2,6 +2,7 @@ package anil.myntratinder.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -68,5 +69,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long product_id = db.insert(table, null, values);
         return product_id;
+    }
+
+    public Product getProduct(String tableName, String columnName, String value){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + tableName + " WHERE "
+                + columnName + " = " + value;
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c != null)
+            c.moveToFirst();
+        Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID))); // fixme: this is wrong, confusion betweet KEY_ID, mId, unique style id from the website
+        product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
+        product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
+        c.close();
+        return product;
     }
 }
