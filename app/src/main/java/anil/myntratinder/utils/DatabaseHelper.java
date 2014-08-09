@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import anil.myntratinder.models.Product;
 
 /**
@@ -83,5 +86,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
         c.close();
         return product;
+    }
+
+    //todo: add an extra parameter to limit number of products
+    //fixme: the columns are a mess, done in a hurry, fix this shit..
+    public List<Product> getProducts(String tableName, String columnName, String value){
+        List<Product> products = new ArrayList<Product>();
+        String selectQuery = "SELECT * FROM " + tableName + " WHERE "
+                + columnName + " = " + value;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor c = sqLiteDatabase.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID)));
+                product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
+                product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
+                products.add(product);
+            } while (c.moveToNext());
+        }
+        return products;
     }
 }
