@@ -115,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //todo: add an extra parameter to limit number of products
-    //fixme: the columns are a mess, done in a hurry, fix this shit..
+    //fixed: the columns are a mess, done in a hurry, fix this shit..
     public List<Product> getProducts(String tableName, String columnName, String value){
         List<Product> products = new ArrayList<Product>();
         String selectQuery = "SELECT * FROM " + tableName + " WHERE "
