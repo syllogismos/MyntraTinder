@@ -42,13 +42,13 @@ public class Product {
     private String styleId;
     private String imageUrl;
     private String dreLandingPageUrl;
-    private boolean liked;
+    private int liked;
 
-    public boolean isLiked() {
+    public int getLiked() {
         return liked;
     }
 
-    public void setLiked(boolean liked) {
+    public void setLiked(int liked) {
         this.liked = liked;
     }
 

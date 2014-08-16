@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_STYLE_ID + " TEXT,"
             + KEY_IMAGE_URL + " TEXT,"
             + KEY_LANDING_PAGE_URL + " TEXT,"
-            + KEY_LIKED + " BOOLEAN" // fixme: is this integer or boolean?
+            + KEY_LIKED + " INTEGER" // fixed: liked is integer in table
             + ")";
 
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -87,7 +87,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_STYLE_ID, product.getStyleId());
         values.put(KEY_IMAGE_URL, product.getImageUrl());
         values.put(KEY_LANDING_PAGE_URL, product.getDreLandingPageUrl());
-        values.putNull(KEY_LIKED);
+        product.setLiked(VALUE_NONE);
+        values.put(KEY_LIKED,VALUE_NONE);
 
         long product_id = db.insert(table, null, values);
         return product_id;
@@ -108,6 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         product.setStyleId(c.getString(c.getColumnIndex(KEY_STYLE_ID)));
         product.setImageUrl(c.getString(c.getColumnIndex(KEY_IMAGE_URL)));
         product.setDreLandingPageUrl(c.getString(c.getColumnIndex(KEY_LANDING_PAGE_URL)));
+        product.setLiked(c.getInt(c.getColumnIndex(KEY_LIKED)));
         c.close();
         return product;
     }
@@ -131,6 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 product.setStyleId(c.getString(c.getColumnIndex(KEY_STYLE_ID)));
                 product.setImageUrl(c.getString(c.getColumnIndex(KEY_IMAGE_URL)));
                 product.setDreLandingPageUrl(c.getString(c.getColumnIndex(KEY_LANDING_PAGE_URL)));
+                product.setLiked(c.getInt(c.getColumnIndex(KEY_LIKED)));
                 products.add(product);
             } while (c.moveToNext());
         }
