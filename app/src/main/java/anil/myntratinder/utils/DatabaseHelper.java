@@ -88,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_IMAGE_URL, product.getImageUrl());
         values.put(KEY_LANDING_PAGE_URL, product.getDreLandingPageUrl());
         product.setLiked(VALUE_NONE);
-        values.put(KEY_LIKED,VALUE_NONE);
+        values.put(KEY_LIKED, VALUE_NONE);
 
         long product_id = db.insert(table, null, values);
         return product_id;
@@ -116,10 +116,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //todo: add an extra parameter to limit number of products
     //fixed: the columns are a mess, done in a hurry, fix this shit..
-    public List<Product> getProducts(String tableName, String columnName, String value){
+    public List<Product> getProducts(String tableName, String columnName, String value, String limit){
         List<Product> products = new ArrayList<Product>();
         String selectQuery = "SELECT * FROM " + tableName + " WHERE "
-                + columnName + " = " + value;
+                + columnName + " = '" + value + "' LIMIT " + limit;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor c = sqLiteDatabase.rawQuery(selectQuery, null);
 
@@ -138,5 +138,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
         return products;
+    }
+
+    public List<Product> getProductsFromGroup(String productGroup, int limit){
+        String limitString = String.valueOf(limit);
+        return getProducts(TABLE_NAME, KEY_PRODUCT_GROUP, productGroup, limitString);
     }
 }
