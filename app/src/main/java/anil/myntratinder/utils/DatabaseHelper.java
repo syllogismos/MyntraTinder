@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // version
     private static final int DATABASE_VERSION = 1;
     // database name
-    private static final String DATABASE_NAME = "anil.MyntraProducts.db";
+    public static final String DATABASE_NAME = "anil.MyntraProducts.db";
     // table name
-    private static final String TABLE_NAME = "myntra_products";
+    public static final String TABLE_NAME = "myntra_products";
 
     private static final String MEN_SHOES_LABEL = "men_shoes";
     private static final String WOMEN_SHOES_LABEL = "women_shoes";
@@ -78,6 +79,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
         onCreate(sqLiteDatabase);
+    }
+
+    public void deleteTable(String table){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("databse helper", "deleted table" + table);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
     }
 
     public long insertNewProduct(Product product, String table) {
