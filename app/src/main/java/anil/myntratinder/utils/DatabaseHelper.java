@@ -51,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_DISCOUNTED_PRICE + " TEXT,"
             + KEY_DISCOUNT + " TEXT,"
             + KEY_PRICE + " TEXT,"
-            + KEY_STYLE_ID + " TEXT,"
+            + KEY_STYLE_ID + " TEXT UNIQUE,"
             + KEY_IMAGE_URL + " TEXT,"
             + KEY_LANDING_PAGE_URL + " TEXT,"
             + KEY_LIKED + " INTEGER" // fixed: liked is integer in table
@@ -63,8 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        // todo: create tables when database is first created
         // things to do generally when a database is created..
+        // todo: crate indexes
         sqLiteDatabase.execSQL(CREATE_TABLE);
     }
 
