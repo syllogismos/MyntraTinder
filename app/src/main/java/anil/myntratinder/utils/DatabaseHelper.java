@@ -57,8 +57,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_LIKED + " INTEGER" // fixed: liked is integer in table
             + ")";
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+//    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+//        super(context, name, factory, version);
+//    }
+
+    public DatabaseHelper(Context context){
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
