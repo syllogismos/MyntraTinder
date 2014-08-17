@@ -94,6 +94,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return product_id;
     }
 
+    public void insertOrReplaceProducts(List<Product> products, String table){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // todo: insert only 20 products at a time, instead of everything at once
+        int length = products.size();
+        String valuesString = "";
+        for (int i = 0; i < length; i++) {
+            Product product = products.get(i);
+            valuesString += "("
+                    + "'" + product.getStyleName() + "',"
+                    + "'" + product.getDiscountedPrice() + "',"
+                    + "'" + product.getDiscount() + "',"
+                    + "'" + product.getPrice() + "',"
+                    + "'" + product.getStyleId() + "',"
+                    + "'" + product.getImageUrl() + "',"
+                    + "'" + product.getDreLandingPageUrl() + "',"
+                    + String.valueOf(product.getLiked()) + ")";
+        }
+        String SQL_INSERT_OR_REPLACE = "INSERT OR REPLACE INTO " + table + " ("
+                + KEY_STYLE_NAME + ","
+                + KEY_DISCOUNTED_PRICE + ","
+                + KEY_DISCOUNT + ","
+                + KEY_PRICE + ","
+                + KEY_STYLE_ID + ","
+                + KEY_IMAGE_URL + ","
+                + KEY_LANDING_PAGE_URL + ","
+                + KEY_LIKED
+                + ")" + " VALUES " + valuesString;
+
+        db.execSQL(SQL_INSERT_OR_REPLACE);
+    }
+
     public Product getProduct(String tableName, String columnName, String value){
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM " + tableName + " WHERE "
