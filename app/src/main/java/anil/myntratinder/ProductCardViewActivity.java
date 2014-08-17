@@ -55,7 +55,7 @@ public class ProductCardViewActivity extends Activity {
         final TextView logText = (TextView) findViewById(R.id.logText);
         splash.setVisibility(View.GONE);
         db = new DatabaseHelper(getApplicationContext());
-        db.deleteTable(db.TABLE_NAME);
+        //db.deleteTable(db.TABLE_NAME);
         doInitialize();
 
         mProductStack.setmProductStackListener(new ProductStackView.ProductStackListener() {
@@ -76,8 +76,8 @@ public class ProductCardViewActivity extends Activity {
                 SingleProductView item = (SingleProductView)beingDragged;
                 item.onChoiceMade(choice, beingDragged);
                 //todo: here is where you have to handle what happens after you select yes or no to a particular card
-                long id = db.insertNewProduct(item.product, db.TABLE_NAME);
-                Log.d("inserted id", String.valueOf(id));
+                //long id = db.insertNewProduct(item.product, db.TABLE_NAME);
+                //Log.d("inserted id", String.valueOf(id));
                 logText.setText(logText.getText() + String.valueOf(item.product));
             }
         });
@@ -87,7 +87,7 @@ public class ProductCardViewActivity extends Activity {
 
     private void doInitialize() {
         ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(this);
-        mAdapter.init(url, postData, fileName);
+        mAdapter.initFromDatabase(url, postData, db, fileName);
         mProductStack.setAdapter(mAdapter);
     }
 
