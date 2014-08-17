@@ -31,21 +31,24 @@ public class ProductCardViewActivity extends Activity {
 
     @AfterViews
     public void initialize(){
-        handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                final View splash = findViewById(R.id.splash);
-                splash.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        splash.setVisibility(View.GONE);
-                        doInitialize();
-                    }
-                }).setDuration(2000).start();
-            }
-        }, 0);
+//        handler = new Handler();
+//
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                final View splash = findViewById(R.id.splash);
+//                splash.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        splash.setVisibility(View.GONE);
+//                        doInitialize();
+//                    }
+//                }).setDuration(2000).start();
+//            }
+//        }, 0);
+        final View splash = findViewById(R.id.splash);
+        splash.setVisibility(View.GONE);
+        doInitialize();
 
         mProductStack.setmProductStackListener(new ProductStackView.ProductStackListener() {
             @Override
