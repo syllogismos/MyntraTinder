@@ -103,6 +103,10 @@ public class Product {
         this.mId = mId;
     }
 
+    public Product(String groupLabel){
+        this.productGroup = groupLabel;
+    }
+
     public int getmId() {
         return mId;
     }
