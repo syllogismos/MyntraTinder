@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -14,6 +16,7 @@ import org.androidannotations.annotations.ViewById;
 
 import anil.myntratinder.adapters.ProductCardAdapter_;
 import anil.myntratinder.adapters.ProductCardAdapter;
+import anil.myntratinder.utils.DatabaseHelper;
 import anil.myntratinder.views.ProductStackView;
 import anil.myntratinder.views.SingleProductView;
 
@@ -28,6 +31,8 @@ public class ProductCardViewActivity extends Activity {
     public String url = "http://www.myntra.com/searchws/search/styleids2";
     public String postData = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":0,\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
     public String fileName = "productscard.json";
+
+    DatabaseHelper db;
 
     @AfterViews
     public void initialize(){
@@ -47,7 +52,10 @@ public class ProductCardViewActivity extends Activity {
 //            }
 //        }, 0);
         final View splash = findViewById(R.id.splash);
+        final TextView logText = (TextView) findViewById(R.id.logText);
         splash.setVisibility(View.GONE);
+        db = new DatabaseHelper(getApplicationContext());
+        db.deleteTable(db.TABLE_NAME);
         doInitialize();
 
         mProductStack.setmProductStackListener(new ProductStackView.ProductStackListener() {
@@ -68,6 +76,9 @@ public class ProductCardViewActivity extends Activity {
                 SingleProductView item = (SingleProductView)beingDragged;
                 item.onChoiceMade(choice, beingDragged);
                 //todo: here is where you have to handle what happens after you select yes or no to a particular card
+                long id = db.insertNewProduct(item.product, db.TABLE_NAME);
+                Log.d("inserted id", String.valueOf(id));
+                logText.setText(logText.getText() + String.valueOf(item.product));
             }
         });
 
