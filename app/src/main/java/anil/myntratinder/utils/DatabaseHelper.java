@@ -92,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_PRODUCT_GROUP, product.getProductGroup());
         values.put(KEY_STYLE_NAME, product.getStyleName());
         values.put(KEY_DISCOUNTED_PRICE, product.getDiscountedPrice());
         values.put(KEY_DISCOUNT, product.getDiscount());
@@ -115,6 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (int i = 0; i < length; i++) {
             Product product = products.get(i);
             valuesString += "("
+                    + "'" + product.getProductGroup() + "',"
                     + "'" + product.getStyleName() + "',"
                     + "'" + product.getDiscountedPrice() + "',"
                     + "'" + product.getDiscount() + "',"
@@ -125,6 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + String.valueOf(product.getLiked()) + ")";
         }
         String SQL_INSERT_OR_REPLACE = "INSERT OR REPLACE INTO " + table + " ("
+                + KEY_PRODUCT_GROUP + ","
                 + KEY_STYLE_NAME + ","
                 + KEY_DISCOUNTED_PRICE + ","
                 + KEY_DISCOUNT + ","
@@ -146,6 +149,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c != null)
             c.moveToFirst();
         Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID))); // fixme: this is wrong, confusion betweet KEY_ID, mId, unique style id from the website
+        product.setProductGroup(c.getString(c.getColumnIndex(KEY_PRODUCT_GROUP)));
         product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
         product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
         product.setDiscount(c.getString(c.getColumnIndex(KEY_DISCOUNT)));
@@ -170,6 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID)));
+                product.setProductGroup(c.getString(c.getColumnIndex(KEY_PRODUCT_GROUP)));
                 product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
                 product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
                 product.setDiscount(c.getString(c.getColumnIndex(KEY_DISCOUNT)));

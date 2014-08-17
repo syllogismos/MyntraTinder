@@ -42,6 +42,16 @@ public class Product {
     private String styleId;
     private String imageUrl;
     private String dreLandingPageUrl;
+
+    public String getProductGroup() {
+        return productGroup;
+    }
+
+    public void setProductGroup(String productGroup) {
+        this.productGroup = productGroup;
+    }
+
+    private String productGroup;
     private int liked;
 
     public int getLiked() {
