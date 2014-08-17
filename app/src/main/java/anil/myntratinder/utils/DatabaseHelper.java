@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_LANDING_PAGE_URL = "landing_page_url";
     public static final String KEY_LIKED = "is_liked";
 
-    // fixme: can't figure out if liked column must be boolean or integer?
+    // fixme: make sure database connections are closed
 
     public static final int VALUE_LIKED = 1;
     public static final int VALUE_DISLIKED = 2;
@@ -124,8 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + "'" + product.getStyleId() + "',"
                     + "'" + product.getImageUrl() + "',"
                     + "'" + product.getDreLandingPageUrl() + "',"
-                    + String.valueOf(product.getLiked()) + ")";
+                    + String.valueOf(product.getLiked()) + "),";
         }
+        valuesString = valuesString.substring(0,valuesString.length()-1);
         String SQL_INSERT_OR_REPLACE = "INSERT OR REPLACE INTO " + table + " ("
                 + KEY_PRODUCT_GROUP + ","
                 + KEY_STYLE_NAME + ","
