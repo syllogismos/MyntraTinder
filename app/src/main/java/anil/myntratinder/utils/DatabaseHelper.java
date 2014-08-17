@@ -23,26 +23,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // table name
     public static final String TABLE_NAME = "myntra_products";
 
-    private static final String MEN_SHOES_LABEL = "men_shoes";
-    private static final String WOMEN_SHOES_LABEL = "women_shoes";
+    public static final String MEN_SHOES_GROUP_LABEL = "men_shoes";
+    public static final String WOMEN_SHOES_gROUP_LABEL = "women_shoes";
 
     // column names
-    private static final String KEY_ID = "id";
-    private static final String KEY_PRODUCT_GROUP = "product_group";
-    private static final String KEY_STYLE_NAME = "style_name";
-    private static final String KEY_DISCOUNTED_PRICE = "discounted_price";
-    private static final String KEY_DISCOUNT = "discount";
-    private static final String KEY_PRICE = "price";
-    private static final String KEY_STYLE_ID = "style_id";
-    private static final String KEY_IMAGE_URL = "image_url";
-    private static final String KEY_LANDING_PAGE_URL = "landing_page_url";
-    private static final String KEY_LIKED = "is_liked";
+    public static final String KEY_ID = "id";
+    public static final String KEY_PRODUCT_GROUP = "product_group";
+    public static final String KEY_STYLE_NAME = "style_name";
+    public static final String KEY_DISCOUNTED_PRICE = "discounted_price";
+    public static final String KEY_DISCOUNT = "discount";
+    public static final String KEY_PRICE = "price";
+    public static final String KEY_STYLE_ID = "style_id";
+    public static final String KEY_IMAGE_URL = "image_url";
+    public static final String KEY_LANDING_PAGE_URL = "landing_page_url";
+    public static final String KEY_LIKED = "is_liked";
 
     // fixme: can't figure out if liked column must be boolean or integer?
 
-    private static final int VALUE_LIKED = 1;
-    private static final int VALUE_DISLIKED = 2;
-    private static final int VALUE_NONE = 0;
+    public static final int VALUE_LIKED = 1;
+    public static final int VALUE_DISLIKED = 2;
+    public static final int VALUE_NONE = 0;
 
     // table create statements
     private static final String CREATE_TABLE = "CREATE TABLE "
