@@ -107,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return product_id;
     }
 
-    public void insertOrReplaceProducts(List<Product> products, String table){
+    public void insertOrIgnoreProducts(List<Product> products, String table){
         SQLiteDatabase db = this.getWritableDatabase();
 
         // todo: insert only 20 products at a time, instead of everything at once
@@ -127,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + String.valueOf(product.getLiked()) + "),";
         }
         valuesString = valuesString.substring(0,valuesString.length()-1);
-        String SQL_INSERT_OR_REPLACE = "INSERT OR REPLACE INTO " + table + " ("
+        String SQL_INSERT_OR_IGNORE = "INSERT OR IGNORE INTO " + table + " ("
                 + KEY_PRODUCT_GROUP + ","
                 + KEY_STYLE_NAME + ","
                 + KEY_DISCOUNTED_PRICE + ","
@@ -139,7 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_LIKED
                 + ")" + " VALUES " + valuesString;
 
-        db.execSQL(SQL_INSERT_OR_REPLACE);
+        db.execSQL(SQL_INSERT_OR_IGNORE);
     }
 
     public Product getProduct(String tableName, String columnName, String value){
@@ -193,5 +193,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Product> getProductsFromGroup(String productGroup, int limit){
         String limitString = String.valueOf(limit);
         return getProducts(TABLE_NAME, KEY_PRODUCT_GROUP, productGroup, limitString);
+    }
+
+    public List<Product> getUnseenProductsFromGroup(String productGroup, int limit) {
+        String limitString = String.valueOf(limit);
+        List<Product> products = new ArrayList<Product>();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + KEY_PRODUCT_GROUP + " = '" + productGroup
+                + "' AND " + KEY_LIKED + " = 0"
+                + " LIMIT " + limit;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor c = sqLiteDatabase.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID)));
+                product.setProductGroup(c.getString(c.getColumnIndex(KEY_PRODUCT_GROUP)));
+                product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
+                product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
+                product.setDiscount(c.getString(c.getColumnIndex(KEY_DISCOUNT)));
+                product.setPrice(c.getString(c.getColumnIndex(KEY_PRICE)));
+                product.setStyleId(c.getString(c.getColumnIndex(KEY_STYLE_ID)));
+                product.setImageUrl(c.getString(c.getColumnIndex(KEY_IMAGE_URL)));
+                product.setDreLandingPageUrl(c.getString(c.getColumnIndex(KEY_LANDING_PAGE_URL)));
+                product.setLiked(c.getInt(c.getColumnIndex(KEY_LIKED)));
+                products.add(product);
+            } while (c.moveToNext());
+        }
+        return products;
+    }
+
+    public void updateLikeStatus(Product product, int likeStatus){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String likeStatusStr = String.valueOf(likeStatus);
+        String UPDATE_QUERY = "UPDATE " + TABLE_NAME
+                + " SET " + KEY_LIKED + " = " + likeStatusStr
+                + " WHERE " + KEY_STYLE_ID + " = " + product.getStyleId();
+        sqLiteDatabase.execSQL(UPDATE_QUERY);
     }
 }
