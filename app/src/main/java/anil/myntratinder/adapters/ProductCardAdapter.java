@@ -115,6 +115,38 @@ public class ProductCardAdapter extends BaseAdapter {
         }
     }
 
+    public void initForTinderFragment(String url, String postData, String fileName, String groupLabel, DatabaseHelper db, SharedPreferences sharedPreferences, String maxProductsKey, String startFromKey){
+        List<Product> productsFromDb = db.getUnseenProductsFromGroup(groupLabel, 20);
+        if (productsFromDb.isEmpty()){
+            if (isNetworkAvailable()) {
+                downloadJsonToFileAndUpdateDbWithGivenKeys(url, postData, fileName, groupLabel, db, sharedPreferences, maxProductsKey, startFromKey);
+                SystemClock.sleep(2000);
+                mItems = db.getUnseenProductsFromGroup(groupLabel, 20);
+            } else {
+                Log.d("product card adapter for tinder fragment", "network is not available");
+                mItems = new ArrayList<Product>();
+            }
+        } else {
+            mItems = productsFromDb;
+        }
+    }
+
+    @Background
+    public void downloadJsonToFileAndUpdateDbWithGivenKeys(String url, String postData, String fileName, String groupLabel, DatabaseHelper db, SharedPreferences sharedPreferences, String maxProductsKey, String startFromKey) {
+        try {
+            Downloader.downloadFromUrl(url, postData, mContext.openFileOutput(fileName, Context.MODE_PRIVATE));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, groupLabel);
+        db.insertOrIgnoreProducts(productsFromFile, db.TABLE_NAME);
+        int startFrom = sharedPreferences.getInt(startFromKey, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(startFromKey, startFrom + 96);
+        editor.commit();
+    }
+
+
     @Background
     public void downloadJsonToFileAndUpdateDb(String url, String updatedPostData, String fileName, DatabaseHelper db, SharedPreferences sharedPreferences) {
         try {
