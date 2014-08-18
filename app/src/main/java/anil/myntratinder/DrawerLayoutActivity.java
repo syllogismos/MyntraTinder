@@ -137,7 +137,13 @@ public class DrawerLayoutActivity extends Activity {
                 fragment = MenShoesFragment.newInstance(url, postData, fileName);
                 break;
             case 3:
-                fragment = new HomeFragment();
+                String groupLabel = getString(R.string.men_shoes_group_label);
+                String fn = getString(R.string.men_shoes_filename);
+                String startFromKey = getString(R.string.men_shoes_start_from_key);
+                String maxProductsKey = getString(R.string.men_shoes_max_products_key);
+                String postDataHead = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":";
+                String postDataTail = ",\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
+                fragment = TinderUIFragment.newInstance(groupLabel,fn, startFromKey, maxProductsKey, postDataHead, postDataTail);
                 break;
             case 4:
                 fragment = new HomeFragment();
