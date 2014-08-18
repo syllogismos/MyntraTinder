@@ -65,7 +65,7 @@ public class ProductCardAdapter extends BaseAdapter {
     public void init(String url, String postData, String fileName) {
         if (isNetworkAvailable()){
             downloadJsonToFile(url, postData, fileName);
-            mItems = ProductsJSONPullParser.getProductsFromFile(mContext, fileName);
+            mItems = ProductsJSONPullParser.getProductsFromFile(mContext, "products.json");
         } else {
             // fixme: figure out what happens when network is not available
             // fixme: here we are loading the same random product 15 times,
@@ -86,12 +86,12 @@ public class ProductCardAdapter extends BaseAdapter {
         List<Product> productsFromDb = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20); // fixme: add one more where clause so that we only poll the products that are null liked
         if (productsFromDb.isEmpty()){
             if (isNetworkAvailable()){
-                downloadJsonToFileDb(url, postData, fileName, db, startFrom);
+                downloadJsonToFile(url, postData, fileName);
                 SharedPreferences startFromSharedKey = mContext.getSharedPreferences(mContext.getString(R.string.shared_preference_file_name_card_activity), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = startFromSharedKey.edit();
                 editor.putInt(mContext.getString(R.string.men_shoes_start_from_key), startFrom + 96);
                 editor.commit();
-                List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, db.MEN_SHOES_GROUP_LABEL, mContext.getString(R.string.men_shoes_max_products_key));
+                List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, mContext.getString(R.string.men_shoes_filename), db.MEN_SHOES_GROUP_LABEL, mContext.getString(R.string.men_shoes_max_products_key));
                 updateDatabaseAndSetAdapter(db, productsFromFile);
             } else {
                 // notify network is not available.
@@ -107,13 +107,7 @@ public class ProductCardAdapter extends BaseAdapter {
     // in the database, and query for new products to fill our adapter
     public void updateDatabaseAndSetAdapter(DatabaseHelper db, List<Product> products) {
         db.insertOrIgnoreProducts(products, db.TABLE_NAME);
-        List<Product> productsFromUpdatedDatabase = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
-        if (productsFromUpdatedDatabase.size() > 0){
-            mItems = productsFromUpdatedDatabase;
-        } else {
-            mItems = new ArrayList<Product>();
-            Log.d("product card adapter", "no new products from updated table");
-        }
+        mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
     }
 
 
@@ -121,16 +115,6 @@ public class ProductCardAdapter extends BaseAdapter {
     public void downloadJsonToFile(String url, String postdata, String filename) {
         try {
             Downloader.downloadFromUrl(url, postdata, mContext.openFileOutput(filename, Context.MODE_PRIVATE));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Background
-    public void downloadJsonToFileDb(String url, String postdata, String fileName, DatabaseHelper db, int startFrom) {
-        try {
-            Downloader.downloadFromUrl(url, postdata, mContext.openFileOutput(fileName, Context.MODE_PRIVATE));
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

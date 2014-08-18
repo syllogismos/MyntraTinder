@@ -126,23 +126,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + "'" + product.getDreLandingPageUrl() + "',"
                     + String.valueOf(product.getLiked()) + "),";
         }
-        if (valuesString.length() > 0) {
-            valuesString = valuesString.substring(0, valuesString.length() - 1);
+        valuesString = valuesString.substring(0,valuesString.length()-1);
+        String SQL_INSERT_OR_IGNORE = "INSERT OR IGNORE INTO " + table + " ("
+                + KEY_PRODUCT_GROUP + ","
+                + KEY_STYLE_NAME + ","
+                + KEY_DISCOUNTED_PRICE + ","
+                + KEY_DISCOUNT + ","
+                + KEY_PRICE + ","
+                + KEY_STYLE_ID + ","
+                + KEY_IMAGE_URL + ","
+                + KEY_LANDING_PAGE_URL + ","
+                + KEY_LIKED
+                + ")" + " VALUES " + valuesString;
 
-            String SQL_INSERT_OR_IGNORE = "INSERT OR IGNORE INTO " + table + " ("
-                    + KEY_PRODUCT_GROUP + ","
-                    + KEY_STYLE_NAME + ","
-                    + KEY_DISCOUNTED_PRICE + ","
-                    + KEY_DISCOUNT + ","
-                    + KEY_PRICE + ","
-                    + KEY_STYLE_ID + ","
-                    + KEY_IMAGE_URL + ","
-                    + KEY_LANDING_PAGE_URL + ","
-                    + KEY_LIKED
-                    + ")" + " VALUES " + valuesString;
-
-            db.execSQL(SQL_INSERT_OR_IGNORE);
-        }
+        db.execSQL(SQL_INSERT_OR_IGNORE);
     }
 
     public Product getProduct(String tableName, String columnName, String value){
