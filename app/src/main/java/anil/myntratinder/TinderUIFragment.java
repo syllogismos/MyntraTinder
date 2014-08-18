@@ -1,6 +1,7 @@
 package anil.myntratinder;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,21 +13,14 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import anil.myntratinder.adapters.ProductCardAdapter;
+import anil.myntratinder.adapters.ProductCardAdapter_;
 import anil.myntratinder.models.Product;
 import anil.myntratinder.utils.DatabaseHelper;
 import anil.myntratinder.views.ProductStackView;
 import anil.myntratinder.views.SingleProductView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TinderUIFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TinderUIFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class TinderUIFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,6 +45,7 @@ public class TinderUIFragment extends Fragment {
     String maxProducts;
     SharedPreferences sharedPreferences;
 
+    public String url = "http://www.myntra.com/searchws/search/styleids2";
 
     public static TinderUIFragment newInstance(String groupLabel, String fileName, String startFromKey, String maxProductsKey, String postDataHead, String postDataTail) {
         TinderUIFragment fragment = new TinderUIFragment();
@@ -88,8 +83,11 @@ public class TinderUIFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tinder_ui, container, false);
         mProductStackView = (ProductStackView) view.findViewById(R.id.tinder_mProductStack);
         db = new DatabaseHelper(getActivity().getApplicationContext());
-        List<Product> products = db.getUnseenProductsFromGroup(getString(R.string.men_shoes_group_label), 5);
-        Log.e("from tinder fragment, check if its the same database", products.toString());
+        // List<Product> products = db.getUnseenProductsFromGroup(getString(R.string.men_shoes_group_label), 5);
+        // Log.e("from tinder fragment, check if its the same database", products.toString());
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        startFrom = sharedPreferences.getInt(mStartFromKey, 0);
+        maxProducts = sharedPreferences.getString(mMaxProductsKey, "1000");
         doInitialize();
 
         mProductStackView.setmProductStackListener(new ProductStackView.ProductStackListener() {
@@ -110,6 +108,12 @@ public class TinderUIFragment extends Fragment {
                 SingleProductView item = (SingleProductView)beingDragged;
                 item.onChoiceMade(choice, beingDragged);
                 //todo: handle what to do after the choice is made.
+                if (choice) {
+                    db.updateLikeStatus(item.product, db.VALUE_LIKED);
+                } else {
+                    db.updateLikeStatus(item.product, db.VALUE_DISLIKED);
+                }
+                Log.d("tinder fragment", "updated the choice made " + String.valueOf(choice) + " " + item.product.getStyleName());
             }
         });
 
@@ -117,7 +121,24 @@ public class TinderUIFragment extends Fragment {
     }
 
     private void doInitialize() {
+        Log.e("Tinder Fragment: start from", String.valueOf(startFrom));
+        Log.e("Tinder Fragment: max products", maxProducts);
+        ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(getActivity());
+        String postData = getUpdatedPostData(startFrom);
+        mAdapter.initForTinderFragment(url,postData,mFileName,mGroupLabel, db, sharedPreferences, mMaxProductsKey, mStartFromKey);
+        if (!mAdapter.isEmpty()){
+            mProductStackView.setAdapter(mAdapter);
+        }
+    }
 
+    private String getUpdatedPostData(int startFrom) {
+        if (startFrom > Integer.parseInt(maxProducts)){
+            startFrom = 0;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.men_shoes_start_from_key), 0);
+            editor.commit();
+        }
+        return mPostDataHead + String.valueOf(startFrom) + mPostDataTail;
     }
 
 }
