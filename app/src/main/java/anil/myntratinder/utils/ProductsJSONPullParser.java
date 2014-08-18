@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import anil.myntratinder.R;
 import anil.myntratinder.models.Product;
 
 /**
@@ -91,14 +92,14 @@ public class ProductsJSONPullParser {
         return products;
     }
 
-    public static List<Product> getProductsFromFileAndInsertGroupLabel(Context context, String filename, String groupLabel){
+    public static List<Product> getProductsFromFileAndInsertGroupLabel(Context context, String filename, String groupLabel, String maxProductsSharedPrefKey){
         /* todo: check if the we are parsing the json properly. extract extra info for each property if needed
          * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
          */
         List<Product> products = new ArrayList<Product>();
         String json = null;
         Product product = null;
-        SharedPreferences sharedPrefMax = context.getSharedPreferences("anil.myntratinder.sharedPrefFile", Context.MODE_PRIVATE);
+        SharedPreferences sharedPrefMax = context.getSharedPreferences(context.getString(R.string.shared_preference_file_name_card_activity), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefMax.edit();
         try {
             FileInputStream fis = context.openFileInput(filename);
@@ -110,7 +111,7 @@ public class ProductsJSONPullParser {
             if (json != null){
                 JSONObject jsonObject = new JSONObject(json);
                 JSONObject response1 = jsonObject.getJSONObject("response1");
-                editor.putString("max_products_shared_preference_key", response1.getString("totalProductsCount"));
+                editor.putString(maxProductsSharedPrefKey, response1.getString("totalProductsCount"));
                 editor.commit();
                 JSONArray productObjects = response1.getJSONArray("products");
                 for (int i = 0; i < productObjects.length(); i++) {

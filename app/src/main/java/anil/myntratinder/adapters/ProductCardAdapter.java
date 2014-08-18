@@ -85,11 +85,11 @@ public class ProductCardAdapter extends BaseAdapter {
         if (productsFromDb.isEmpty()){
             if (isNetworkAvailable()){
                 downloadJsonToFile(url, postData, fileName);
-                SharedPreferences startFromSharedKey = mContext.getSharedPreferences("anil.myntratinder.sharedPrefFile", Context.MODE_PRIVATE);
+                SharedPreferences startFromSharedKey = mContext.getSharedPreferences(mContext.getString(R.string.shared_preference_file_name_card_activity), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = startFromSharedKey.edit();
-                editor.putInt("start_from_shared_preference_key", startFrom + 96);
+                editor.putInt(mContext.getString(R.string.men_shoes_start_from_key), startFrom + 96);
                 editor.commit();
-                List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, "products.json", db.MEN_SHOES_GROUP_LABEL);
+                List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, mContext.getString(R.string.men_shoes_filename), db.MEN_SHOES_GROUP_LABEL, mContext.getString(R.string.men_shoes_max_products_key));
                 updateDatabaseAndSetAdapter(db, productsFromFile);
             } else {
                 // notify network is not available.
