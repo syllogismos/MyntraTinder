@@ -76,8 +76,12 @@ public class ProductCardViewActivity extends Activity {
                 SingleProductView item = (SingleProductView)beingDragged;
                 item.onChoiceMade(choice, beingDragged);
                 //todo: here is where you have to handle what happens after you select yes or no to a particular card
-                //long id = db.insertNewProduct(item.product, db.TABLE_NAME);
-                //Log.d("inserted id", String.valueOf(id));
+                if (choice) {
+                    db.updateLikeStatus(item.product, db.VALUE_LIKED);
+                } else {
+                    db.updateLikeStatus(item.product, db.VALUE_DISLIKED);
+                }
+                Log.d("product card view activity", "updated the choice made " + String.valueOf(choice) + " " + item.product.getStyleName());
                 logText.setText(logText.getText() + String.valueOf(item.product));
             }
         });
