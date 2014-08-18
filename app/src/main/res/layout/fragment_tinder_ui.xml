@@ -4,10 +4,22 @@
     android:layout_height="match_parent"
     tools:context="anil.myntratinder.TinderUIFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:id="@+id/tinder_content">
+
+        <anil.myntratinder.views.ProductStackView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tinder_mProductStack"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="10dp"
+            android:layout_margin="0dp">
+        </anil.myntratinder.views.ProductStackView>
+    </RelativeLayout>
 
 </FrameLayout>
