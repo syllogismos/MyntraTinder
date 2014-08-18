@@ -11,6 +11,19 @@
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
 
+    <string name="shared_preference_file_name_card_activity">anil.myntratinder.ProductCardView.sharedPrefFile</string>
+
+    <string name="men_shoes_group_label">men_shoes_group_label</string>
+    <string name="men_shoes_filename">men_shoes_filename</string>
+    <string name="men_shoes_start_from_key">men_shoes_start_from_key</string>
+    <string name="men_shoes_max_products_key">men_shoes_max_products_key</string>
+
+    <string name="women_shoes_group_label">women_shoes_group_label</string>
+    <string name="women_shoes_filename">women_shoes_file_name</string>
+    <string name="women_shoes_start_from_key">women_shoes_start_from_key</string>
+    <string name="women_shoes_max_products_key">women_shoes_max_products_key</string>
+
+
     <string-array name="nav_drawer_items">
         <item>Home</item>
         <item>Male</item>
