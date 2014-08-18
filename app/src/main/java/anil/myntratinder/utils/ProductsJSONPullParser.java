@@ -1,6 +1,7 @@
 package anil.myntratinder.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,6 +95,7 @@ public class ProductsJSONPullParser {
         /* todo: check if the we are parsing the json properly. extract extra info for each property if needed
          * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
          */
+        Log.e("getting products from file", filename);
         List<Product> products = new ArrayList<Product>();
         String json = null;
         Product product = null;
@@ -118,6 +120,7 @@ public class ProductsJSONPullParser {
                     product.setImageUrl(p.getString("search_image"));
                     product.setDiscountedPrice(p.getString("discounted_price"));
                     product.setStyleName(p.getString("stylename"));
+                    Log.e("product returned", product.getStyleName());
                     products.add(product);
                     /*
                      * todo: get image url from the json object imageEntry_default, rather than search_image
