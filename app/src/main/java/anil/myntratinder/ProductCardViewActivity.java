@@ -33,11 +33,11 @@ public class ProductCardViewActivity extends Activity {
     public String postData = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":0,\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
     public String postDataHead = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":";
     public String postDataTail = ",\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
-    public String fileName = getString(R.string.men_shoes_filename);
+    public String fileName;
 
-    SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_name_card_activity), MODE_PRIVATE);
-    int startFrom = sharedPreferences.getInt(getString(R.string.men_shoes_start_from_key), 0);
-    String maxProducts = sharedPreferences.getString(getString(R.string.men_shoes_max_products_key), "1000");
+    public SharedPreferences sharedPreferences;
+    public int startFrom;
+    public String maxProducts;
 
     DatabaseHelper db;
 
@@ -62,7 +62,11 @@ public class ProductCardViewActivity extends Activity {
         final TextView logText = (TextView) findViewById(R.id.logText);
         splash.setVisibility(View.GONE);
         db = new DatabaseHelper(getApplicationContext());
-        //db.deleteTable(db.TABLE_NAME);
+        fileName = getString(R.string.men_shoes_filename);
+        sharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_name_card_activity), MODE_PRIVATE);
+        // resetStoredValues();
+        startFrom = sharedPreferences.getInt(getString(R.string.men_shoes_start_from_key), 0);
+        maxProducts = sharedPreferences.getString(getString(R.string.men_shoes_max_products_key), "1000");
         doInitializeSharedPref();
 
         mProductStack.setmProductStackListener(new ProductStackView.ProductStackListener() {
@@ -96,7 +100,19 @@ public class ProductCardViewActivity extends Activity {
         return;
     }
 
+    private void resetStoredValues() {
+        db.deleteTable(db.TABLE_NAME);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(getString(R.string.men_shoes_start_from_key), 0);
+        editor.putString(getString(R.string.men_shoes_max_products_key), "1000");
+        editor.commit();
+        startFrom = 0;
+        maxProducts = "1000";
+    }
+
     private void doInitializeSharedPref() {
+        Log.e("start from ", String.valueOf(startFrom));
+        Log.e("max_products", maxProducts);
         ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(this);
         String updatedPostData = getUpdatedPostData(startFrom);
         mAdapter.initFromDatabaseUsingSharedPref(url, updatedPostData, db, fileName, sharedPreferences);
