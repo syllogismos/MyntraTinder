@@ -1,6 +1,7 @@
 package anil.myntratinder.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,6 +98,8 @@ public class ProductsJSONPullParser {
         List<Product> products = new ArrayList<Product>();
         String json = null;
         Product product = null;
+        SharedPreferences sharedPrefMax = context.getSharedPreferences("anil.myntratinder.sharedPrefFile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefMax.edit();
         try {
             FileInputStream fis = context.openFileInput(filename);
             int size = fis.available();
@@ -107,6 +110,8 @@ public class ProductsJSONPullParser {
             if (json != null){
                 JSONObject jsonObject = new JSONObject(json);
                 JSONObject response1 = jsonObject.getJSONObject("response1");
+                editor.putString("max_products_shared_preference_key", response1.getString("totalProductsCount"));
+                editor.commit();
                 JSONArray productObjects = response1.getJSONArray("products");
                 for (int i = 0; i < productObjects.length(); i++) {
                     JSONObject p = productObjects.getJSONObject(i);

@@ -1,6 +1,7 @@
 package anil.myntratinder.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
@@ -77,17 +78,22 @@ public class ProductCardAdapter extends BaseAdapter {
         }
     }
 
-    public void initFromDatabase(String url, String postData, DatabaseHelper db, String fileName){
+    public void initFromDatabase(String url, String postData, DatabaseHelper db, String fileName, int startFrom){
         // todo: fill the adapter from the database instead of file system..
         // fixme: here we are downloading data to filesystem and then updating the database.. can we update the database from the network?
         List<Product> productsFromDb = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20); // fixme: add one more where clause so that we only poll the products that are null liked
         if (productsFromDb.isEmpty()){
             if (isNetworkAvailable()){
                 downloadJsonToFile(url, postData, fileName);
+                SharedPreferences startFromSharedKey = mContext.getSharedPreferences("anil.myntratinder.sharedPrefFile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = startFromSharedKey.edit();
+                editor.putInt("start_from_shared_preference_key", startFrom + 96);
+                editor.commit();
                 List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, "products.json", db.MEN_SHOES_GROUP_LABEL);
                 updateDatabaseAndSetAdapter(db, productsFromFile);
             } else {
                 // notify network is not available.
+                mItems = new ArrayList<Product>();
                 Log.d("product card adapter", "network is not available");
             }
         } else {
