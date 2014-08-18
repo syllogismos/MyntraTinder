@@ -1,6 +1,7 @@
 package anil.myntratinder;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import anil.myntratinder.utils.DatabaseHelper;
+import anil.myntratinder.views.ProductStackView;
+import anil.myntratinder.views.SingleProductView;
 
 
 /**
@@ -22,29 +26,39 @@ import android.view.ViewGroup;
 public class TinderUIFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_GROUP_LABEL = "groupLabel";
+    private static final String ARG_GROUP_FILE_NAME = "fileName";
+    private static final String ARG_GROUP_START_FROM_KEY = "startFromKey";
+    private static final String ARG_GROUP_MAX_PRODUCTS_KEY = "maxProductsKey";
+    private static final String ARG_GROUP_POST_DATA_HEAD = "postDataHead";
+    private static final String ARG_GROUP_POST_DATA_TAIL = "postDataTail";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mGroupLabel;
+    private String mFileName;
+    private String mStartFromKey;
+    private String mMaxProductsKey;
+    private String mPostDataHead;
+    private String mPostDataTail;
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TinderUIFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TinderUIFragment newInstance(String param1, String param2) {
+    ProductStackView mProductStackView;
+    DatabaseHelper db;
+    int startFrom;
+    String maxProducts;
+    SharedPreferences sharedPreferences;
+
+
+    public static TinderUIFragment newInstance(String groupLabel, String fileName, String startFromKey, String maxProductsKey, String postDataHead, String postDataTail) {
         TinderUIFragment fragment = new TinderUIFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_GROUP_LABEL, groupLabel);
+        args.putString(ARG_GROUP_FILE_NAME, fileName);
+        args.putString(ARG_GROUP_START_FROM_KEY, startFromKey);
+        args.putString(ARG_GROUP_MAX_PRODUCTS_KEY, maxProductsKey);
+        args.putString(ARG_GROUP_POST_DATA_HEAD, postDataHead);
+        args.putString(ARG_GROUP_POST_DATA_TAIL, postDataTail);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,8 +70,12 @@ public class TinderUIFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mGroupLabel = getArguments().getString(ARG_GROUP_LABEL);
+            mFileName = getArguments().getString(ARG_GROUP_FILE_NAME);
+            mStartFromKey = getArguments().getString(ARG_GROUP_START_FROM_KEY);
+            mMaxProductsKey = getArguments().getString(ARG_GROUP_MAX_PRODUCTS_KEY);
+            mPostDataHead = getArguments().getString(ARG_GROUP_POST_DATA_HEAD);
+            mPostDataTail = getArguments().getString(ARG_GROUP_POST_DATA_TAIL);
         }
     }
 
@@ -65,7 +83,37 @@ public class TinderUIFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tinder_ui, container, false);
+        View view = inflater.inflate(R.layout.fragment_tinder_ui, container, false);
+        mProductStackView = (ProductStackView) view.findViewById(R.id.tinder_mProductStack);
+        db = new DatabaseHelper(getActivity().getApplicationContext());
+        doInitialize();
+
+        mProductStackView.setmProductStackListener(new ProductStackView.ProductStackListener() {
+            @Override
+            public void onUpdateProgress(boolean positif, float percent, View view) {
+                SingleProductView item = (SingleProductView)view;
+                item.onUpdateProgress(positif, percent, view);
+            }
+
+            @Override
+            public void onCancelled(View beingDragged) {
+                SingleProductView item = (SingleProductView)beingDragged;
+                item.onCancelled(beingDragged);
+            }
+
+            @Override
+            public void onChoiceMade(boolean choice, View beingDragged) {
+                SingleProductView item = (SingleProductView)beingDragged;
+                item.onChoiceMade(choice, beingDragged);
+                //todo: handle what to do after the choice is made.
+            }
+        });
+
+        return view;
+    }
+
+    private void doInitialize() {
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
