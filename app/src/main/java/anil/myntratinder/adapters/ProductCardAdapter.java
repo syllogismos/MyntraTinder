@@ -105,7 +105,7 @@ public class ProductCardAdapter extends BaseAdapter {
                 // fixme: downloadJsonToFileAndUpdateDb is a background task that downloads new products and updates the db, perhaps it should also query products from the db and return
                 downloadJsonToFileAndUpdateDb(url, updatedPostData, fileName, db, sharedPreferences);
                 SystemClock.sleep(2000);
-                mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);;
+                mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
             } else {
                 Log.d("productCardAdapter", "network is not available");
                 mItems = new ArrayList<Product>();
@@ -119,7 +119,7 @@ public class ProductCardAdapter extends BaseAdapter {
     public void downloadJsonToFileAndUpdateDb(String url, String updatedPostData, String fileName, DatabaseHelper db, SharedPreferences sharedPreferences) {
         try {
             Downloader.downloadFromUrl(url, updatedPostData, mContext.openFileOutput(fileName, Context.MODE_PRIVATE));
-            List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, db.MEN_SHOES_GROUP_LABEL);
+            // List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, db.MEN_SHOES_GROUP_LABEL);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -129,6 +129,8 @@ public class ProductCardAdapter extends BaseAdapter {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(mContext.getString(R.string.men_shoes_start_from_key), startFrom + 96);
         editor.commit();
+        // SystemClock.sleep(1500);
+        // mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
         //return db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
     }
 
