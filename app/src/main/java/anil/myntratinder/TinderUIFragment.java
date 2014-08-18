@@ -5,10 +5,14 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import anil.myntratinder.models.Product;
 import anil.myntratinder.utils.DatabaseHelper;
 import anil.myntratinder.views.ProductStackView;
 import anil.myntratinder.views.SingleProductView;
@@ -40,8 +44,6 @@ public class TinderUIFragment extends Fragment {
     private String mMaxProductsKey;
     private String mPostDataHead;
     private String mPostDataTail;
-
-    private OnFragmentInteractionListener mListener;
 
     ProductStackView mProductStackView;
     DatabaseHelper db;
@@ -86,6 +88,8 @@ public class TinderUIFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tinder_ui, container, false);
         mProductStackView = (ProductStackView) view.findViewById(R.id.tinder_mProductStack);
         db = new DatabaseHelper(getActivity().getApplicationContext());
+        List<Product> products = db.getUnseenProductsFromGroup(getString(R.string.men_shoes_group_label), 5);
+        Log.e("from tinder fragment, check if its the same database", products.toString());
         doInitialize();
 
         mProductStackView.setmProductStackListener(new ProductStackView.ProductStackListener() {
@@ -114,45 +118,6 @@ public class TinderUIFragment extends Fragment {
 
     private void doInitialize() {
 
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
     }
 
 }
