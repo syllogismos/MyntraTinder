@@ -166,7 +166,7 @@ public class ProductStackView extends RelativeLayout{
 
 
     private boolean adapterHasMoreItems() {
-        return mCurrentPosition < mAdapter.getCount() - 1;
+        return mCurrentPosition < mAdapter.getCount();
     }
 
     private boolean isTopCard(View card) {
@@ -288,6 +288,7 @@ public class ProductStackView extends RelativeLayout{
                         }
 
                         int sign = mXDelta > 0 ? +1 : -1;
+                        final boolean finalChoice = mXDelta > 0;
                         mBeingDragged = null;
                         mXDelta = 0;
                         mYDelta = 0;
@@ -300,7 +301,7 @@ public class ProductStackView extends RelativeLayout{
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 if (mProductStackListener != null){
-                                    boolean choice = getStackChoice();
+                                    boolean choice = finalChoice;
                                     mProductStackListener.onChoiceMade(choice, last);
                                 }
 
