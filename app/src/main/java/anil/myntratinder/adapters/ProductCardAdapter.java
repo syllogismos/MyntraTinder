@@ -80,7 +80,7 @@ public class ProductCardAdapter extends BaseAdapter {
     public void initFromDatabase(String url, String postData, DatabaseHelper db, String fileName){
         // todo: fill the adapter from the database instead of file system..
         // fixme: here we are downloading data to filesystem and then updating the database.. can we update the database from the network?
-        List<Product> productsFromDb = db.getProducts(db.TABLE_NAME, db.KEY_PRODUCT_GROUP, db.MEN_SHOES_GROUP_LABEL, "20"); // fixme: add one more where clause so that we only poll the products that are null liked
+        List<Product> productsFromDb = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20); // fixme: add one more where clause so that we only poll the products that are null liked
         if (productsFromDb.isEmpty()){
             if (isNetworkAvailable()){
                 downloadJsonToFile(url, postData, fileName);
@@ -97,8 +97,8 @@ public class ProductCardAdapter extends BaseAdapter {
 
 
     public void updateDatabaseAndSetAdapter(DatabaseHelper db, List<Product> products) {
-        db.insertOrReplaceProducts(products, db.TABLE_NAME);
-        mItems = db.getProducts(db.TABLE_NAME, db.KEY_PRODUCT_GROUP, db.MEN_SHOES_GROUP_LABEL, "20");
+        db.insertOrIgnoreProducts(products, db.TABLE_NAME);
+        mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
     }
 
 
