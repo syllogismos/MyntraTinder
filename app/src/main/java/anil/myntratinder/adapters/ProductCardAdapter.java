@@ -1,10 +1,12 @@
 package anil.myntratinder.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +95,41 @@ public class ProductCardAdapter extends BaseAdapter {
         } else {
             mItems = productsFromDb;
         }
+    }
+
+
+    public void initFromDatabaseUsingSharedPref(String url, String updatedPostData, DatabaseHelper db, String fileName, SharedPreferences sharedPreferences) {
+        List<Product> productsFromDb = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
+        if (productsFromDb.isEmpty()){
+            if (isNetworkAvailable()){
+                // fixme: downloadJsonToFileAndUpdateDb is a background task that downloads new products and updates the db, perhaps it should also query products from the db and return
+                downloadJsonToFileAndUpdateDb(url, updatedPostData, fileName, db, sharedPreferences);
+                SystemClock.sleep(2000);
+                mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);;
+            } else {
+                Log.d("productCardAdapter", "network is not available");
+                mItems = new ArrayList<Product>();
+            }
+        } else {
+            mItems = productsFromDb;
+        }
+    }
+
+    @Background
+    public void downloadJsonToFileAndUpdateDb(String url, String updatedPostData, String fileName, DatabaseHelper db, SharedPreferences sharedPreferences) {
+        try {
+            Downloader.downloadFromUrl(url, updatedPostData, mContext.openFileOutput(fileName, Context.MODE_PRIVATE));
+            List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, db.MEN_SHOES_GROUP_LABEL);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, db.MEN_SHOES_GROUP_LABEL);
+        db.insertOrIgnoreProducts(productsFromFile, db.TABLE_NAME);
+        int startFrom = sharedPreferences.getInt(mContext.getString(R.string.men_shoes_start_from_key), 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(mContext.getString(R.string.men_shoes_start_from_key), startFrom + 96);
+        editor.commit();
+        //return db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
     }
 
 
