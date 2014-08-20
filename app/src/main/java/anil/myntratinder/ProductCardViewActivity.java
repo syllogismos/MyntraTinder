@@ -3,6 +3,7 @@ package anil.myntratinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
@@ -30,7 +31,13 @@ public class ProductCardViewActivity extends Activity {
 
     public String url = "http://www.myntra.com/searchws/search/styleids2";
     public String postData = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":0,\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
-    public String fileName = "productscard.json";
+    public String postDataHead = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":";
+    public String postDataTail = ",\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
+    public String fileName = getString(R.string.men_shoes_filename);
+
+    SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_name_card_activity), MODE_PRIVATE);
+    int startFrom = sharedPreferences.getInt(getString(R.string.men_shoes_start_from_key), 0);
+    String maxProducts = sharedPreferences.getString(getString(R.string.men_shoes_max_products_key), "1000");
 
     DatabaseHelper db;
 
@@ -56,7 +63,7 @@ public class ProductCardViewActivity extends Activity {
         splash.setVisibility(View.GONE);
         db = new DatabaseHelper(getApplicationContext());
         //db.deleteTable(db.TABLE_NAME);
-        doInitialize();
+        doInitializeSharedPref();
 
         mProductStack.setmProductStackListener(new ProductStackView.ProductStackListener() {
             @Override
@@ -87,6 +94,15 @@ public class ProductCardViewActivity extends Activity {
         });
 
         return;
+    }
+
+    private void doInitializeSharedPref() {
+        ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(this);
+        String updatedPostData = postDataHead + String.valueOf(startFrom) + postDataTail;
+        mAdapter.initFromDatabaseUsingSharedPref(url, updatedPostData, db, fileName, sharedPreferences);
+        if (!mAdapter.isEmpty()){
+            mProductStack.setAdapter(mAdapter);
+        }
     }
 
     private void doInitialize() {
