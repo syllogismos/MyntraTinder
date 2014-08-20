@@ -80,8 +80,6 @@ public class ProductCardAdapter extends BaseAdapter {
     public void initFromDatabase(String url, String postData, DatabaseHelper db, String fileName){
         // todo: fill the adapter from the database instead of file system..
         // fixme: here we are downloading data to filesystem and then updating the database.. can we update the database from the network?
-        // check if there are enough products of a specific product group to fill the adapter,
-        // else, get products from the network starting from the start from parameter we get from the shared pref key value
         List<Product> productsFromDb = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20); // fixme: add one more where clause so that we only poll the products that are null liked
         if (productsFromDb.isEmpty()){
             if (isNetworkAvailable()){
@@ -97,8 +95,7 @@ public class ProductCardAdapter extends BaseAdapter {
         }
     }
 
-    // here we just got the products freshly downloaded from the internet, we need to store them
-    // in the database, and query for new products to fill our adapter
+
     public void updateDatabaseAndSetAdapter(DatabaseHelper db, List<Product> products) {
         db.insertOrIgnoreProducts(products, db.TABLE_NAME);
         mItems = db.getUnseenProductsFromGroup(db.MEN_SHOES_GROUP_LABEL, 20);
