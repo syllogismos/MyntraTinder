@@ -98,11 +98,21 @@ public class ProductCardViewActivity extends Activity {
 
     private void doInitializeSharedPref() {
         ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(this);
-        String updatedPostData = postDataHead + String.valueOf(startFrom) + postDataTail;
+        String updatedPostData = getUpdatedPostData(startFrom);
         mAdapter.initFromDatabaseUsingSharedPref(url, updatedPostData, db, fileName, sharedPreferences);
         if (!mAdapter.isEmpty()){
             mProductStack.setAdapter(mAdapter);
         }
+    }
+
+    private String getUpdatedPostData(int startFrom) {
+        if (startFrom > Integer.parseInt(maxProducts)){
+            startFrom = 0;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.men_shoes_start_from_key), 0);
+            editor.commit();
+        }
+        return postDataHead + String.valueOf(startFrom) + postDataTail;
     }
 
     private void doInitialize() {
