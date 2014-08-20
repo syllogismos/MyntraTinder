@@ -104,6 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_LIKED, VALUE_NONE);
 
         long product_id = db.insert(table, null, values);
+        db.close();
         return product_id;
     }
 
@@ -126,20 +127,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + "'" + product.getDreLandingPageUrl() + "',"
                     + String.valueOf(product.getLiked()) + "),";
         }
-        valuesString = valuesString.substring(0,valuesString.length()-1);
-        String SQL_INSERT_OR_IGNORE = "INSERT OR IGNORE INTO " + table + " ("
-                + KEY_PRODUCT_GROUP + ","
-                + KEY_STYLE_NAME + ","
-                + KEY_DISCOUNTED_PRICE + ","
-                + KEY_DISCOUNT + ","
-                + KEY_PRICE + ","
-                + KEY_STYLE_ID + ","
-                + KEY_IMAGE_URL + ","
-                + KEY_LANDING_PAGE_URL + ","
-                + KEY_LIKED
-                + ")" + " VALUES " + valuesString;
+        Log.e("values being inserted", valuesString);
+        if (valuesString.length() > 0) {
+            valuesString = valuesString.substring(0, valuesString.length() - 1);
+            String SQL_INSERT_OR_IGNORE = "INSERT OR IGNORE INTO " + table + " ("
+                    + KEY_PRODUCT_GROUP + ","
+                    + KEY_STYLE_NAME + ","
+                    + KEY_DISCOUNTED_PRICE + ","
+                    + KEY_DISCOUNT + ","
+                    + KEY_PRICE + ","
+                    + KEY_STYLE_ID + ","
+                    + KEY_IMAGE_URL + ","
+                    + KEY_LANDING_PAGE_URL + ","
+                    + KEY_LIKED
+                    + ")" + " VALUES " + valuesString;
 
-        db.execSQL(SQL_INSERT_OR_IGNORE);
+            db.execSQL(SQL_INSERT_OR_IGNORE);
+        }
+        db.close();
     }
 
     public Product getProduct(String tableName, String columnName, String value){
@@ -160,6 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         product.setDreLandingPageUrl(c.getString(c.getColumnIndex(KEY_LANDING_PAGE_URL)));
         product.setLiked(c.getInt(c.getColumnIndex(KEY_LIKED)));
         c.close();
+        db.close();
         return product;
     }
 
@@ -187,6 +193,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 products.add(product);
             } while (c.moveToNext());
         }
+        sqLiteDatabase.close();
         return products;
     }
 
@@ -220,6 +227,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 products.add(product);
             } while (c.moveToNext());
         }
+        sqLiteDatabase.close();
+        Log.e("gettign unseen products", products.toString());
         return products;
     }
 
@@ -230,5 +239,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " SET " + KEY_LIKED + " = " + likeStatusStr
                 + " WHERE " + KEY_STYLE_ID + " = " + product.getStyleId();
         sqLiteDatabase.execSQL(UPDATE_QUERY);
+        sqLiteDatabase.close();
     }
 }
