@@ -108,10 +108,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return product_id;
     }
 
-    public void insertOrIgnoreProducts(List<Product> products, String table){
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        // todo: insert only 20 products at a time, instead of everything at once
+    // todo: have some clarity on when a database is closed, is it really necessary? but close all cursors.. for now closing all database instances..
+    public void insertOrIgnoreProducts(List<Product> products, String table){
+
         int length = products.size();
         String valuesString = "";
         for (int i = 0; i < length; i++) {
@@ -141,10 +141,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + KEY_LANDING_PAGE_URL + ","
                     + KEY_LIKED
                     + ")" + " VALUES " + valuesString;
-
+            SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL(SQL_INSERT_OR_IGNORE);
+            db.close();
         }
-        db.close();
+
     }
 
     public Product getProduct(String tableName, String columnName, String value){
@@ -193,6 +194,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 products.add(product);
             } while (c.moveToNext());
         }
+        c.close();
         sqLiteDatabase.close();
         return products;
     }
@@ -227,6 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 products.add(product);
             } while (c.moveToNext());
         }
+        c.close();
         sqLiteDatabase.close();
         Log.e("gettign unseen products", products.toString());
         return products;
