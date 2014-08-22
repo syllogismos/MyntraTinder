@@ -191,6 +191,58 @@ public class ProductsJSONPullParser {
         return products;
     }
 
+    public static List<Product> getProdutsFromFileAndUpdateMaxProductsNewApi(Context context, String filename, String groupLabel, String maxProductsKey, SharedPreferences sharedPreferences){
+        /* todo: check if the we are parsing the json properly. extract extra info for each property if needed
+         * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
+         */
+        Log.e("getting products from file", filename);
+        List<Product> products = new ArrayList<Product>();
+        String json = null;
+        Product product = null;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            int size = fis.available();
+            byte[] buffer = new byte[size];
+            fis.read(buffer);
+            fis.close();
+            json = new String(buffer, "UTF-8");
+            if (json != null){
+                JSONObject postResponse = new JSONObject(json);
+                JSONObject jsonObject = postResponse.getJSONObject("queryResult");
+                JSONObject response1 = jsonObject.getJSONObject("response1");
+                editor.putString(maxProductsKey, response1.getString("totalProductsCount"));
+                editor.commit();
+                JSONArray productObjects = response1.getJSONArray("products");
+                for (int i = 0; i < productObjects.length(); i++) {
+                    JSONObject p = productObjects.getJSONObject(i);
+                    product = new Product(groupLabel);
+                    product.setDiscount(p.getString("discount"));
+                    product.setPrice(p.getString("price"));
+                    product.setStyleId(p.getString("styleid"));
+                    product.setDreLandingPageUrl(p.getString("dre_landing_page_url"));
+                    product.setImageUrl(p.getString("search_image"));
+                    product.setDiscountedPrice(p.getString("discounted_price"));
+                    product.setStyleName(p.getString("stylename"));
+                    Log.e("product returned", product.getStyleName());
+                    products.add(product);
+                    /*
+                     * todo: get image url from the json object imageEntry_default, rather than search_image
+                     * todo: add more getter and setters to the Product class to extract even more data from json object
+                     */
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
 
     // todo: get image url from imageEntry_default, you can control the image quality
     // if you parse imageEntry_default you can get image details like relativePath, supportedResolutions, domain, path, resolutionFormula, securedDomain etc
