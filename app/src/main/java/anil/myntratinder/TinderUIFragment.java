@@ -86,6 +86,7 @@ public class TinderUIFragment extends Fragment {
         // List<Product> products = db.getUnseenProductsFromGroup(getString(R.string.men_shoes_group_label), 5);
         // Log.e("from tinder fragment, check if its the same database", products.toString());
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        // resetStoredValues();
         startFrom = sharedPreferences.getInt(mStartFromKey, 0);
         maxProducts = sharedPreferences.getString(mMaxProductsKey, "1000");
         doInitialize();
@@ -118,6 +119,14 @@ public class TinderUIFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void resetStoredValues() {
+        db.deleteTable(db.TABLE_NAME);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(mStartFromKey, 0);
+        editor.putString(mMaxProductsKey, "1000");
+        editor.commit();
     }
     //fixme: figure out how to eliminate the ui lag when the database gets new products from the internet..
     // already tried initializing the product stack inside the overridden method onViewCreated, and it didn't improve anything..
