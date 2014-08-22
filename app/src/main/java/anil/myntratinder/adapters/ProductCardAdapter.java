@@ -138,7 +138,7 @@ public class ProductCardAdapter extends BaseAdapter {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        List<Product> productsFromFile = ProductsJSONPullParser.getProductsFromFileAndInsertGroupLabel(mContext, fileName, groupLabel);
+        List<Product> productsFromFile = ProductsJSONPullParser.getProdutsFromFileAndUpdateMaxProducts(mContext, fileName, groupLabel, maxProductsKey, sharedPreferences);
         db.insertOrIgnoreProducts(productsFromFile, db.TABLE_NAME);
         int startFrom = sharedPreferences.getInt(startFromKey, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
