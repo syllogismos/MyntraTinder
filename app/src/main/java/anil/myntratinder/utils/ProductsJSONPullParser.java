@@ -209,7 +209,7 @@ public class ProductsJSONPullParser {
             json = new String(buffer, "UTF-8");
             if (json != null){
                 JSONObject postResponse = new JSONObject(json);
-                JSONObject jsonObject = postResponse.getJSONObject("queryResult");
+                JSONObject jsonObject = new JSONObject(postResponse.getString("queryResult"));
                 JSONObject response1 = jsonObject.getJSONObject("response1");
                 editor.putString(maxProductsKey, response1.getString("totalProductsCount"));
                 editor.commit();
@@ -244,11 +244,14 @@ public class ProductsJSONPullParser {
     }
 
 
-    // todo: get image url from imageEntry_default, you can control the image quality
-    // if you parse imageEntry_default you can get image details like relativePath, supportedResolutions, domain, path, resolutionFormula, securedDomain etc
-    // fixme: instead of returning String return the JSONObject json here,
-    // add additional properties to Product model like relativePath, domain etc for image for now just use search_image
-    // product.setImageUrl(getImageUrlFromJson(p.getString("imageEntry_default")));
+    /*
+    * todo: add new properties to Product model, like "image_domain", "image_realative_path"
+    * also update the db, with new columns to store the above newly added properties
+    * in the above parsing functions do this,
+    * imageEntry_default_json_object = new JSONObject(p.getString("imageEntry_default"));
+    * p.setImageDomain = imageEntry_default_json_object.getString("domain");
+    * p.setImageRelativePath = imageEntry_default_json_object.getString("relativePath");
+    * */
     public static String getImageUrlFromJson(String imageEntry_default){
         String imageUrl = "";
         try {
