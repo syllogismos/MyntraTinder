@@ -11,3 +11,5 @@ if there are still some products that are yet to be "swiped" by the user, it get
 the db, else, it inserts new products from the internet by sending a post request 
 starting from the start_from number into the database, and then queries the updated table for new 
 products again and initializes the adapter.  
+
+Test readme.
