@@ -119,6 +119,8 @@ public class TinderUIFragment extends Fragment {
 
         return view;
     }
+    //fixme: figure out how to eliminate the ui lag when the database gets new products from the internet..
+    // already tried initializing the product stack inside the overridden method onViewCreated, and it didn't improve anything..
 
     private void doInitialize() {
         Log.e("Tinder Fragment: start from", String.valueOf(startFrom));
