@@ -61,6 +61,16 @@ public class MyActivity extends Activity {
             }
         });
 
+        Button myntraTinderButton = (Button)findViewById(R.id.tinder_button);
+        myntraTinderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tinderActivityIntent;
+                tinderActivityIntent = new Intent(getBaseContext(), MyntraTinderActivity.class);
+                startActivity(tinderActivityIntent);
+            }
+        });
+
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
 
 //        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
