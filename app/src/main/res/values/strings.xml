@@ -10,32 +10,26 @@
     <string name="title_activity_drawer_layout">DrawerLayoutActivity</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
-
     <string name="shared_preference_file_name_card_activity">anil.myntratinder.ProductCardView.sharedPrefFile</string>
-
     <string name="myntra_main_url">http://www.myntra.com/searchws/search/styleids2</string>
-
     <string name="men_shoes_group_label">men_shoes_group_label</string>
     <string name="men_shoes_filename">men_shoes_filename</string>
     <string name="men_shoes_start_from_key">men_shoes_start_from_key</string>
     <string name="men_shoes_max_products_key">men_shoes_max_products_key</string>
     <string name="men_shoes_post_data_head">[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Casual Shoes\\\") AND global_attr_master_category:(\\\"Footwear\\\" OR \\\"Free Items\\\"))\",\"start\":</string>
     <string name="men_shoes_post_data_tail">,\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]</string>
-
     <string name="men_casual_shirts_label">men_casual_shirts</string>
     <string name="men_casual_shirts_filename">men_casual_shirts_filename</string>
     <string name="men_casual_shirts_from_key">men_casual_shirts_start_from_key</string>
     <string name="men_casual_shirts_max_products_key">men_casual_shirts_max_products_key</string>
     <string name="men_casual_shirts_post_data_head">[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Shirts\\\") AND global_attr_usage:(\\\"Casual\\\" OR \\\"Ethnic\\\" OR \\\"Home\\\" OR \\\"NA\\\" OR \\\"Party\\\" OR \\\"Smart Casual\\\" OR \\\"Sports\\\" OR \\\"Travel\\\"))\",\"start\":0,\"rows\":</string>
     <string name="men_casual_shirts_post_data_tail">,\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]</string>
-
     <string name="women_shoes_group_label">women_shoes_group_label</string>
     <string name="women_shoes_filename">women_shoes_file_name</string>
     <string name="women_shoes_start_from_key">women_shoes_start_from_key</string>
     <string name="women_shoes_max_products_key">women_shoes_max_products_key</string>
     <string name="women_shoes_post_data_head">a</string>
     <string name="women_shoes_post_data_tail">a</string>
-
 
     <string-array name="nav_drawer_items">
         <item>Home</item>
@@ -55,5 +49,12 @@
 
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_myntra_tinder">Myntra Tinder</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>

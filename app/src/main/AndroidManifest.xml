@@ -45,7 +45,15 @@
             android:name=".DrawerLayoutActivity"
             android:label="@string/title_activity_drawer_layout"
             android:parentActivityName=".MyActivity"
-            android:theme="@style/AppThemeWithActionBar">
+            android:theme="@style/AppThemeWithActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MyActivity" />
+        </activity>
+        <activity
+            android:name=".MyntraTinderActivity"
+            android:label="@string/title_activity_myntra_tinder"
+            android:parentActivityName=".MyActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MyActivity" />
