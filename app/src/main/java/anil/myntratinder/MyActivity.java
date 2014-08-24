@@ -17,7 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import anil.myntratinder.adapters.MyntraCategoryExpandableListAdapter;
 import anil.myntratinder.adapters.SampleExpandableListAdapter;
+import anil.myntratinder.models.MyntraCategory;
 
 
 public class MyActivity extends Activity {
@@ -98,8 +100,9 @@ public class MyActivity extends Activity {
 //                android.R.layout.simple_expandable_list_item_2, new String[] {
 //                PARENT_KEY, CHILD_KEY }, new int[] {
 //                android.R.id.text1, android.R.id.text2 });
-        prepareListData();
-        expandableListAdapter = new SampleExpandableListAdapter(this, listDataHeader, listDataChild);
+        //prepareListData();
+        List<MyntraCategory.ProductHeadGroup> myntraCategories = MyntraCategory.generateSampleProductHeadGroups(this);
+        expandableListAdapter = new MyntraCategoryExpandableListAdapter(this, myntraCategories);
         expandableListView.setAdapter(expandableListAdapter);
     }
 
