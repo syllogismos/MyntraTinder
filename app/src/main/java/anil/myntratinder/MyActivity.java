@@ -3,6 +3,7 @@ package anil.myntratinder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,6 +105,40 @@ public class MyActivity extends Activity {
         List<MyntraCategory.ProductHeadGroup> myntraCategories = MyntraCategory.generateSampleProductHeadGroups(this);
         expandableListAdapter = new MyntraCategoryExpandableListAdapter(this, myntraCategories);
         expandableListView.setAdapter(expandableListAdapter);
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                ExpandableListAdapter adp = expandableListView.getExpandableListAdapter();
+                MyntraCategory.ProductGroup pg = (MyntraCategory.ProductGroup) adp.getChild(groupPosition, childPosition);
+                Log.e("checking if click event on group is working", pg.getGroupLabel());
+                return true;
+            }
+        });
+
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                if (i == 110) {
+                    Log.e("group click listener", "working");
+                    return true;
+                } else {
+                    return false;
+                }
+                //return true;
+            }
+        });
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int len = expandableListAdapter.getGroupCount();
+                for (int i = 0; i < len; i++) {
+                    if (i!=groupPosition){
+                        expandableListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
     }
 
     private void prepareListData() {
