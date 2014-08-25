@@ -6,10 +6,11 @@
     android:background="@drawable/gray_border">
 
     <ImageView
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="350dp"
+        android:padding="2dp"
         android:src="@drawable/blank"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:id="@+id/picture"
         tools:src="@drawable/sample_product_image"/>
 
