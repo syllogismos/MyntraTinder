@@ -19,8 +19,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.List;
+
+import anil.myntratinder.adapters.MyntraCategoryExpandableListAdapter;
+import anil.myntratinder.models.MyntraCategory;
+
+import static anil.myntratinder.models.MyntraCategory.generateSampleProductHeadGroups;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -53,6 +62,10 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
+
+    private ExpandableListView mDrawerExpandableListView;
+    private List<MyntraCategory.ProductHeadGroup> mDrawerProductHeadGroups;
+    private ExpandableListAdapter mDrawerExpandableListAdapter;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -89,8 +102,9 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
+        View fragmentView =  inflater.inflate(
                 R.layout.fragment_navigation_drawer_myntra_tinder_activity, container, false);
+        mDrawerListView = (ListView) fragmentView.findViewById(R.id.listView);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,9 +119,34 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
-                }));
+                }
+        ));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+
+        mDrawerProductHeadGroups = generateSampleProductHeadGroups(getActivity());
+        mDrawerExpandableListView = (ExpandableListView) fragmentView.findViewById(R.id.expandableListView);
+        mDrawerExpandableListAdapter = new MyntraCategoryExpandableListAdapter(getActivity(), mDrawerProductHeadGroups);
+        mDrawerExpandableListView.setAdapter(mDrawerExpandableListAdapter);
+        mDrawerExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int len = mDrawerExpandableListAdapter.getGroupCount();
+                for (int i = 0; i < len; i++) {
+                    if (i != groupPosition){
+                        mDrawerExpandableListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
+        mDrawerExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) mDrawerExpandableListAdapter.getChild(groupPosition, childPosition);
+                selectProductGroup(productGroup);
+                return true;
+            }
+        });
+        return fragmentView;
     }
 
     public boolean isDrawerOpen() {
@@ -201,6 +240,15 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
+    private void selectProductGroup(MyntraCategory.ProductGroup productGroup){
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+        if (mCallbacks != null) {
+            mCallbacks.onNavigationDrawerProductGroupSelected(productGroup);
+        }
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -278,5 +326,7 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+
+        void onNavigationDrawerProductGroupSelected(MyntraCategory.ProductGroup productGroup);
     }
 }
