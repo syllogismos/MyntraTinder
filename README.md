@@ -2,6 +2,7 @@ Products from a shopping website showcased in a Tinder like UI.
 ==============================================================
 
 * Android app that implements tinder ui, based on https://github.com/exctasy2/tinder-card-stack
+* Latest apk build file [here](https://github.com/syllogismos/MyntraTinder/blob/master/app-debug.apk)
 
 For each product group we have start_from, max_products sharepref key values so that we can see
 what products we stored in our sqlite database.
@@ -11,5 +12,3 @@ if there are still some products that are yet to be "swiped" by the user, it get
 the db, else, it inserts new products from the internet by sending a post request 
 starting from the start_from number into the database, and then queries the updated table for new 
 products again and initializes the adapter.  
-
-Test readme.
