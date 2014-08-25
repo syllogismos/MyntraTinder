@@ -54,6 +54,7 @@
             android:name=".MyntraTinderActivity"
             android:label="@string/title_activity_myntra_tinder"
             android:parentActivityName=".MyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeWithActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
