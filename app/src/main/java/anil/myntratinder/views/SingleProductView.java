@@ -60,9 +60,9 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
         } else {
             no.setAlpha(percent);
         }
-        styleName.setAlpha(0);
-        actualPrice.setAlpha(0);
-        discountedPrice.setAlpha(0);
+        // styleName.setAlpha(0);
+        // actualPrice.setAlpha(0);
+        // discountedPrice.setAlpha(0);
     }
 
     @Override
