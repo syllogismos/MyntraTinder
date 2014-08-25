@@ -86,7 +86,7 @@ public class TinderUIFragment extends Fragment {
         // List<Product> products = db.getUnseenProductsFromGroup(getString(R.string.men_shoes_group_label), 5);
         // Log.e("from tinder fragment, check if its the same database", products.toString());
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        // resetStoredValues();
+        resetStoredValues();
         startFrom = sharedPreferences.getInt(mStartFromKey, 0);
         maxProducts = sharedPreferences.getString(mMaxProductsKey, "1000");
         doInitialize();

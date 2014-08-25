@@ -196,7 +196,7 @@ public class NavigationDrawerFragment extends Fragment {
                 }
             }
         });
-        mDrawerWomenExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        mDrawerKidsExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
                 MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) mDrawerKidsExpandableListAdapter.getChild(groupPosition, childPosition);
