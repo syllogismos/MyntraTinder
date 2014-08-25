@@ -169,7 +169,8 @@ public class ProductsJSONPullParser {
                     product.setPrice(p.getString("price"));
                     product.setStyleId(p.getString("styleid"));
                     product.setDreLandingPageUrl(p.getString("dre_landing_page_url"));
-                    product.setImageUrl(p.getString("search_image"));
+                    // product.setImageUrl(p.getString("search_image"));
+                    product.setImageUrl(getImageUrlFromJson(p.getString("imageEntry_default")));
                     product.setDiscountedPrice(p.getString("discounted_price"));
                     product.setStyleName(p.getString("stylename"));
                     Log.e("product returned", product.getStyleName());
@@ -253,16 +254,19 @@ public class ProductsJSONPullParser {
     * p.setImageRelativePath = imageEntry_default_json_object.getString("relativePath");
     * */
     public static String getImageUrlFromJson(String imageEntry_default){
-        String imageUrl = "";
+        String domain = "";
+        String relativePath = "";
+        String middle = "h_350,q_100,w_300/";
         try {
             if (imageEntry_default != null){
                 JSONObject json = new JSONObject(imageEntry_default);
-                imageUrl = json.getString("path");
+                domain = json.getString("domain");
+                relativePath = json.getString("relativePath");
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return imageUrl;
+        return domain + middle + relativePath;
     }
 
 
