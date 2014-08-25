@@ -6,7 +6,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:id="@+id/listView"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
@@ -14,10 +14,53 @@
         android:background="#cccc"
         tools:context="anil.myntratinder.NavigationDrawerFragment" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Men"
+        android:textSize="30dp"
+
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:layout_below="@id/listView"
+        android:id="@+id/menTextView"/>
+
     <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/expandableListView"
-        android:layout_below="@id/listView" />
+        android:id="@+id/menExpandableListView"
+        android:layout_below="@id/menTextView" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="women"
+        android:textSize="30dp"
+
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:layout_below="@id/menExpandableListView"
+        android:id="@+id/womenTextView"/>
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/womenExpandableListView"
+        android:layout_below="@id/womenTextView" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="kids"
+        android:textSize="30dp"
+
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:layout_below="@id/womenExpandableListView"
+        android:id="@+id/kidsTextView"/>
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/kidsExpandableListView"
+        android:layout_below="@id/kidsTextView" />
 </RelativeLayout>

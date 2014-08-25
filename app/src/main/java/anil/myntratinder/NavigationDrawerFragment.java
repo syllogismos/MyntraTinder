@@ -29,6 +29,9 @@ import java.util.List;
 import anil.myntratinder.adapters.MyntraCategoryExpandableListAdapter;
 import anil.myntratinder.models.MyntraCategory;
 
+import static anil.myntratinder.models.MyntraCategory.generateMyntraKidsProductGroups;
+import static anil.myntratinder.models.MyntraCategory.generateMyntraMenProductGroups;
+import static anil.myntratinder.models.MyntraCategory.generateMyntraWomenProductGroups;
 import static anil.myntratinder.models.MyntraCategory.generateSampleProductHeadGroups;
 
 /**
@@ -63,9 +66,17 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private ExpandableListView mDrawerExpandableListView;
-    private List<MyntraCategory.ProductHeadGroup> mDrawerProductHeadGroups;
-    private ExpandableListAdapter mDrawerExpandableListAdapter;
+    private ExpandableListView mDrawerMenExpandableListView;
+    private List<MyntraCategory.ProductHeadGroup> mDrawerMenProductHeadGroups;
+    private ExpandableListAdapter mDrawerMenExpandableListAdapter;
+
+    private ExpandableListView mDrawerWomenExpandableListView;
+    private List<MyntraCategory.ProductHeadGroup> mDrawerWomenProductHeadGroups;
+    private ExpandableListAdapter mDrawerWomenExpandableListAdapter;
+
+    private ExpandableListView mDrawerKidsExpandableListView;
+    private List<MyntraCategory.ProductHeadGroup> mDrawerKidsProductHeadGroups;
+    private ExpandableListAdapter mDrawerKidsExpandableListAdapter;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -116,36 +127,84 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                        "Home",
+                        "Settings"
                 }
         ));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
-        mDrawerProductHeadGroups = generateSampleProductHeadGroups(getActivity());
-        mDrawerExpandableListView = (ExpandableListView) fragmentView.findViewById(R.id.expandableListView);
-        mDrawerExpandableListAdapter = new MyntraCategoryExpandableListAdapter(getActivity(), mDrawerProductHeadGroups);
-        mDrawerExpandableListView.setAdapter(mDrawerExpandableListAdapter);
-        mDrawerExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        mDrawerMenProductHeadGroups = generateMyntraMenProductGroups(getActivity());
+        mDrawerMenExpandableListView = (ExpandableListView) fragmentView.findViewById(R.id.menExpandableListView);
+        mDrawerMenExpandableListAdapter = new MyntraCategoryExpandableListAdapter(getActivity(), mDrawerMenProductHeadGroups);
+        mDrawerMenExpandableListView.setAdapter(mDrawerMenExpandableListAdapter);
+        mDrawerMenExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                int len = mDrawerExpandableListAdapter.getGroupCount();
+                int len = mDrawerMenExpandableListAdapter.getGroupCount();
                 for (int i = 0; i < len; i++) {
                     if (i != groupPosition){
-                        mDrawerExpandableListView.collapseGroup(i);
+                        mDrawerMenExpandableListView.collapseGroup(i);
                     }
                 }
             }
         });
-        mDrawerExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        mDrawerMenExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
-                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) mDrawerExpandableListAdapter.getChild(groupPosition, childPosition);
+                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) mDrawerMenExpandableListAdapter.getChild(groupPosition, childPosition);
                 selectProductGroup(productGroup);
                 return true;
             }
         });
+
+        mDrawerWomenProductHeadGroups = generateMyntraWomenProductGroups(getActivity());
+        mDrawerWomenExpandableListView = (ExpandableListView) fragmentView.findViewById(R.id.womenExpandableListView);
+        mDrawerWomenExpandableListAdapter = new MyntraCategoryExpandableListAdapter(getActivity(), mDrawerWomenProductHeadGroups);
+        mDrawerWomenExpandableListView.setAdapter(mDrawerWomenExpandableListAdapter);
+        mDrawerWomenExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int len = mDrawerWomenExpandableListAdapter.getGroupCount();
+                for (int i = 0; i < len; i++) {
+                    if (i != groupPosition){
+                        mDrawerWomenExpandableListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
+        mDrawerWomenExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) mDrawerWomenExpandableListAdapter.getChild(groupPosition, childPosition);
+                selectProductGroup(productGroup);
+                return true;
+            }
+        });
+
+        mDrawerKidsProductHeadGroups = generateMyntraKidsProductGroups(getActivity());
+        mDrawerKidsExpandableListView = (ExpandableListView) fragmentView.findViewById(R.id.kidsExpandableListView);
+        mDrawerKidsExpandableListAdapter = new MyntraCategoryExpandableListAdapter(getActivity(), mDrawerKidsProductHeadGroups);
+        mDrawerKidsExpandableListView.setAdapter(mDrawerKidsExpandableListAdapter);
+        mDrawerKidsExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int len = mDrawerKidsExpandableListAdapter.getGroupCount();
+                for (int i = 0; i < len; i++) {
+                    if (i != groupPosition){
+                        mDrawerKidsExpandableListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
+        mDrawerWomenExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) mDrawerKidsExpandableListAdapter.getChild(groupPosition, childPosition);
+                selectProductGroup(productGroup);
+                return true;
+            }
+        });
+
         return fragmentView;
     }
 
