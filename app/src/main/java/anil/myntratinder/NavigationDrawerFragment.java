@@ -146,6 +146,8 @@ public class NavigationDrawerFragment extends Fragment {
                         mDrawerMenExpandableListView.collapseGroup(i);
                     }
                 }
+                collapseGroupsOfExpandableListView(mDrawerWomenExpandableListView, mDrawerWomenExpandableListAdapter);
+                collapseGroupsOfExpandableListView(mDrawerKidsExpandableListView, mDrawerKidsExpandableListAdapter);
             }
         });
         mDrawerMenExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -170,6 +172,8 @@ public class NavigationDrawerFragment extends Fragment {
                         mDrawerWomenExpandableListView.collapseGroup(i);
                     }
                 }
+                collapseGroupsOfExpandableListView(mDrawerMenExpandableListView, mDrawerMenExpandableListAdapter);
+                collapseGroupsOfExpandableListView(mDrawerKidsExpandableListView, mDrawerKidsExpandableListAdapter);
             }
         });
         mDrawerWomenExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -194,6 +198,8 @@ public class NavigationDrawerFragment extends Fragment {
                         mDrawerKidsExpandableListView.collapseGroup(i);
                     }
                 }
+                collapseGroupsOfExpandableListView(mDrawerMenExpandableListView, mDrawerMenExpandableListAdapter);
+                collapseGroupsOfExpandableListView(mDrawerWomenExpandableListView, mDrawerWomenExpandableListAdapter);
             }
         });
         mDrawerKidsExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -206,6 +212,13 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         return fragmentView;
+    }
+
+    private void collapseGroupsOfExpandableListView(ExpandableListView expandableListView, ExpandableListAdapter expandableListAdapter) {
+        int len = expandableListAdapter.getGroupCount();
+        for (int i = 0; i < len; i++) {
+            expandableListView.collapseGroup(i);
+        }
     }
 
     public boolean isDrawerOpen() {
