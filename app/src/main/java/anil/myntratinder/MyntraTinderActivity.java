@@ -5,19 +5,14 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import anil.myntratinder.R;
+
 import anil.myntratinder.models.MyntraCategory;
 
 public class MyntraTinderActivity extends Activity
@@ -61,7 +56,7 @@ public class MyntraTinderActivity extends Activity
     public void onNavigationDrawerProductGroupSelected(MyntraCategory.ProductGroup productGroup) {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = TinderUIFragment.newInstance(
-                productGroup.getGroupLabel(),
+                productGroup.getUniqueGroupLabel(),
                 productGroup.getFileName(),
                 productGroup.getStartFromKey(),
                 productGroup.getMaxProductsKey(),

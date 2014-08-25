@@ -7,19 +7,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import anil.myntratinder.adapters.MyntraCategoryExpandableListAdapter;
-import anil.myntratinder.adapters.SampleExpandableListAdapter;
 import anil.myntratinder.models.MyntraCategory;
 
 
@@ -110,7 +106,7 @@ public class MyActivity extends Activity {
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
                 ExpandableListAdapter adp = expandableListView.getExpandableListAdapter();
                 MyntraCategory.ProductGroup pg = (MyntraCategory.ProductGroup) adp.getChild(groupPosition, childPosition);
-                Log.e("checking if click event on group is working", pg.getGroupLabel());
+                Log.e("checking if click event on group is working", pg.getUniqueGroupLabel());
                 return true;
             }
         });
@@ -133,7 +129,7 @@ public class MyActivity extends Activity {
             public void onGroupExpand(int groupPosition) {
                 int len = expandableListAdapter.getGroupCount();
                 for (int i = 0; i < len; i++) {
-                    if (i!=groupPosition){
+                    if (i != groupPosition) {
                         expandableListView.collapseGroup(i);
                     }
                 }
