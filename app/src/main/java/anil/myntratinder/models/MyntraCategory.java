@@ -115,7 +115,7 @@ public class MyntraCategory {
                 context.getString(R.string.men_shoes_filename),
                 context.getString(R.string.men_shoes_start_from_key),
                 context.getString(R.string.men_shoes_max_products_key),
-                context.getString(R.string.men_casual_shirts_post_data_head),
+                context.getString(R.string.men_shoes_post_data_head),
                 context.getString(R.string.men_shoes_post_data_tail)
         );
 
