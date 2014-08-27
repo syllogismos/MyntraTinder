@@ -12,6 +12,8 @@ import java.util.List;
 
 import anil.myntratinder.models.Product;
 
+import static android.database.DatabaseUtils.sqlEscapeString;
+
 /**
  * Created by Anil on 8/7/2014.
  */
@@ -117,14 +119,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (int i = 0; i < length; i++) {
             Product product = products.get(i);
             valuesString += "("
-                    + "'" + product.getProductGroup() + "',"
-                    + "'" + product.getStyleName() + "',"
-                    + "'" + product.getDiscountedPrice() + "',"
-                    + "'" + product.getDiscount() + "',"
-                    + "'" + product.getPrice() + "',"
-                    + "'" + product.getStyleId() + "',"
-                    + "'" + product.getImageUrl() + "',"
-                    + "'" + product.getDreLandingPageUrl() + "',"
+                     + sqlEscapeString(product.getProductGroup()) + ","
+                     + sqlEscapeString(product.getStyleName()) + ","
+                     + sqlEscapeString(product.getDiscountedPrice()) + ","
+                     + sqlEscapeString(product.getDiscount()) + ","
+                     + sqlEscapeString(product.getPrice()) + ","
+                     + sqlEscapeString(product.getStyleId()) + ","
+                     + sqlEscapeString(product.getImageUrl()) + ","
+                     + sqlEscapeString(product.getDreLandingPageUrl()) + ","
                     + String.valueOf(product.getLiked()) + "),";
         }
         Log.e("values being inserted", valuesString);
