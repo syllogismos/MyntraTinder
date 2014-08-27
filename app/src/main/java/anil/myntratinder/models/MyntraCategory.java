@@ -649,10 +649,10 @@ public class MyntraCategory {
         // Watches //
         productGroup = new ProductGroup(
                 "Watches",
-                "men-accessories-watches",
-                "men-accessories-watches-file",
-                "men-accessories-watches-start-key",
-                "men-accessories-watches-max-products-key",
+                "women-accessories-watches",
+                "women-accessories-watches-file",
+                "women-accessories-watches-start-key",
+                "women-accessories-watches-max-products-key",
                 "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Unisex\\\" OR \\\"Adults-Women\\\") AND global_attr_article_type_facet:(\\\"Watches\\\"))\",\"start\":",
                 ",\"rows\":96,\"facetField\":[\"Watch_Type_article_attr\",\"Water_Resistance_article_attr\",\"Features_article_attr\",\"Strap_Type_article_attr\",\"Occasion_article_attr\"],\"fq\":[\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store21_female_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_female_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true,\"facet\":true}]"
         );
