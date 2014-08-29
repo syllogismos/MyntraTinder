@@ -25,6 +25,7 @@ public class TinderUIFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_GROUP_LABEL = "groupLabel";
+    private static final String ARG_UNIQUE_GROUP_LABEL = "uniqueGroupLabel";
     private static final String ARG_GROUP_FILE_NAME = "fileName";
     private static final String ARG_GROUP_START_FROM_KEY = "startFromKey";
     private static final String ARG_GROUP_MAX_PRODUCTS_KEY = "maxProductsKey";
@@ -33,6 +34,7 @@ public class TinderUIFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mGroupLabel;
+    private String mUniqueGroupLabel;
     private String mFileName;
     private String mStartFromKey;
     private String mMaxProductsKey;
@@ -47,10 +49,11 @@ public class TinderUIFragment extends Fragment {
 
     public String url = "http://www.myntra.com/searchws/search/styleids2";
 
-    public static TinderUIFragment newInstance(String groupLabel, String fileName, String startFromKey, String maxProductsKey, String postDataHead, String postDataTail) {
+    public static TinderUIFragment newInstance(String groupLabel, String uniqueGroupLabel, String fileName, String startFromKey, String maxProductsKey, String postDataHead, String postDataTail) {
         TinderUIFragment fragment = new TinderUIFragment();
         Bundle args = new Bundle();
         args.putString(ARG_GROUP_LABEL, groupLabel);
+        args.putString(ARG_UNIQUE_GROUP_LABEL, uniqueGroupLabel);
         args.putString(ARG_GROUP_FILE_NAME, fileName);
         args.putString(ARG_GROUP_START_FROM_KEY, startFromKey);
         args.putString(ARG_GROUP_MAX_PRODUCTS_KEY, maxProductsKey);
@@ -68,6 +71,7 @@ public class TinderUIFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mGroupLabel = getArguments().getString(ARG_GROUP_LABEL);
+            mUniqueGroupLabel = getArguments().getString(ARG_UNIQUE_GROUP_LABEL);
             mFileName = getArguments().getString(ARG_GROUP_FILE_NAME);
             mStartFromKey = getArguments().getString(ARG_GROUP_START_FROM_KEY);
             mMaxProductsKey = getArguments().getString(ARG_GROUP_MAX_PRODUCTS_KEY);
@@ -152,4 +156,11 @@ public class TinderUIFragment extends Fragment {
         return mPostDataHead + String.valueOf(startFrom) + mPostDataTail;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MyntraTinderActivity) activity).onTinderFragmentAttached(
+                getArguments().getString(ARG_GROUP_LABEL)
+        );
+    }
 }
