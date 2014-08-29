@@ -238,12 +238,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getLikedProductsFromGroup(String productGroupName){
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE "
+        // a cursor object that is fed into a cursor adapter must have a column name "_id"
+        // for that instead of changing our model, we can do
+        // SELECT id _id, * FROM // instead of
+        // SELECT * FROM //
+        // in the above query "id" is our actual column name
+        // http://stackoverflow.com/a/7494398/544102
+        String selectQuery = "SELECT id _id, * FROM " + TABLE_NAME + " WHERE "
                 + KEY_PRODUCT_GROUP + " = '" + productGroupName
                 + "' AND " + KEY_LIKED + " = 1";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
-        db.close();
         return c;
     }
 
