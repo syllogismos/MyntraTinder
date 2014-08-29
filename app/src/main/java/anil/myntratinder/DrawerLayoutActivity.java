@@ -143,7 +143,7 @@ public class DrawerLayoutActivity extends Activity {
                 String maxProductsKey = getString(R.string.men_shoes_max_products_key);
                 String postDataHead = getString(R.string.men_shoes_post_data_head);
                 String postDataTail = getString(R.string.men_shoes_post_data_tail);
-                fragment = TinderUIFragment.newInstance(groupLabel,fn, startFromKey, maxProductsKey, postDataHead, postDataTail);
+                fragment = TinderUIFragment.newInstance("", groupLabel,fn, startFromKey, maxProductsKey, postDataHead, postDataTail);
                 break;
             case 4:
                 String groupLabel_ = "men_casual_shirts";
@@ -152,7 +152,7 @@ public class DrawerLayoutActivity extends Activity {
                 String maxProductsKey_ = "men_casual_shirts_max_products_key";
                 String postDataHead_ = "[{\"query\":\"(global_attr_age_group:(\\\"Adults-Men\\\" OR \\\"Adults-Unisex\\\") AND global_attr_article_type_facet:(\\\"Shirts\\\") AND global_attr_usage:(\\\"Casual\\\" OR \\\"Ethnic\\\" OR \\\"Home\\\" OR \\\"NA\\\" OR \\\"Party\\\" OR \\\"Smart Casual\\\" OR \\\"Sports\\\" OR \\\"Travel\\\"))\",\"start\":";
                 String postDataTail_ = ",\"rows\":96,\"facet\":true,\"facetField\":[\"Casual_Shoe_Type_article_attr\",\"Upper_Material_article_attr\",\"Fastening_article_attr\",\"Ankle_Height_article_attr\",\"Width_article_attr\"],\"fq\":[\"discounted_price:[499 TO 8199]\",\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store3_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true}]";
-                fragment = TinderUIFragment.newInstance(groupLabel_, fn_, startFromKey_, maxProductsKey_, postDataHead_, postDataTail_);
+                fragment = TinderUIFragment.newInstance("", groupLabel_, fn_, startFromKey_, maxProductsKey_, postDataHead_, postDataTail_);
                 break;
             default:
                 break;
