@@ -237,6 +237,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return products;
     }
 
+    public Cursor getLikedProductsFromGroup(String productGroupName){
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + KEY_PRODUCT_GROUP + " = '" + productGroupName
+                + "' AND " + KEY_LIKED + " = 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        db.close();
+        return c;
+    }
+
     public void updateLikeStatus(Product product, int likeStatus){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String likeStatusStr = String.valueOf(likeStatus);
