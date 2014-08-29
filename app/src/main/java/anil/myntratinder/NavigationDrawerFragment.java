@@ -363,6 +363,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // todo: code to handle menu clicks
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
