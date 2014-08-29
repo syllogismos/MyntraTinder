@@ -53,7 +53,7 @@ public class MyntraTinderActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, ""))
                 .commit();
     }
 
@@ -61,6 +61,7 @@ public class MyntraTinderActivity extends Activity
     public void onNavigationDrawerProductGroupSelected(MyntraCategory.ProductGroup productGroup) {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = TinderUIFragment.newInstance(
+                productGroup.getGroupLabel(),
                 productGroup.getUniqueGroupLabel(),
                 productGroup.getFileName(),
                 productGroup.getStartFromKey(),
@@ -120,6 +121,10 @@ public class MyntraTinderActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
+    public void onTinderFragmentAttached(String groupLabel) {
+        mTitle = groupLabel;
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -130,14 +135,17 @@ public class MyntraTinderActivity extends Activity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private static final String ARG_PRODUCT_GROUP = "product_group";
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber, String productGroup) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(ARG_PRODUCT_GROUP, productGroup);
             fragment.setArguments(args);
             return fragment;
         }
