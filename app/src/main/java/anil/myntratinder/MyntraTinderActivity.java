@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,8 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
+import anil.myntratinder.adapters.ProductListAdapterWithACursor;
 import anil.myntratinder.models.MyntraCategory;
+import anil.myntratinder.utils.DatabaseHelper;
 
 public class MyntraTinderActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -143,7 +148,12 @@ public class MyntraTinderActivity extends Activity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_myntra_tinder, container, false);
+            View rootView = inflater.inflate(R.layout.activity_product_list_view, container, false);
+            ListView listView = (ListView) rootView.findViewById(R.id.productList);
+            DatabaseHelper db = new DatabaseHelper(getActivity().getApplicationContext());
+            Cursor cursor = db.getLikedProductsFromGroup("men-footwear-casual-shoes");
+            ListAdapter adapter = new ProductListAdapterWithACursor(getActivity(), cursor, false);
+            listView.setAdapter(adapter);
             return rootView;
         }
 
