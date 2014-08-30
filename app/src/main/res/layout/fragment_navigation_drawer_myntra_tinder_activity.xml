@@ -1,17 +1,21 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="15"
     android:background="#cccc">
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:id="@+id/listView"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:background="#cccc"
+        android:fadeScrollbars="false"
         tools:context="anil.myntratinder.NavigationDrawerFragment" />
 
     <TextView
@@ -27,8 +31,10 @@
 
     <ExpandableListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:id="@+id/menExpandableListView"
+        android:fadeScrollbars="false"
         android:layout_below="@id/menTextView" />
 
     <TextView
@@ -44,8 +50,10 @@
 
     <ExpandableListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="4"
         android:id="@+id/womenExpandableListView"
+        android:fadeScrollbars="false"
         android:layout_below="@id/womenTextView" />
     <TextView
         android:layout_width="match_parent"
@@ -60,7 +68,10 @@
 
     <ExpandableListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
         android:id="@+id/kidsExpandableListView"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="10dp"
         android:layout_below="@id/kidsTextView" />
-</RelativeLayout>
+</LinearLayout>
