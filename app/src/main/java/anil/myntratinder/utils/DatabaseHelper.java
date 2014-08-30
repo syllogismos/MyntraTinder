@@ -247,7 +247,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String selectQuery = "SELECT id _id, * FROM " + TABLE_NAME + " WHERE "
                 + KEY_PRODUCT_GROUP + " = '" + productGroupName
                 + "' AND " + KEY_LIKED + " = 1";
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         return c;
     }
