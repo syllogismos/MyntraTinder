@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -62,13 +63,25 @@ public class MyntraCategoryExpandableListAdapter extends BaseExpandableListAdapt
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String header = getGroup(groupPosition).getGroupName();
-        if (convertView == null) {
+        MyntraCategory.ProductHeadGroup headGroup = getGroup(groupPosition);
+        String header = headGroup.getGroupName();
+        if (headGroup.isHeader()) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.expandable_list_main_header, null);
+            TextView headerTextView = (TextView) convertView.findViewById(R.id.idExpandableHeaderItem);
+            headerTextView.setText(header);
+        } else {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_header, null);
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.expandableHeaderIcon);
+            if (isExpanded){
+                imageView.setImageResource(R.drawable.ic_action_collapse_dark);
+            } else {
+                imageView.setImageResource(R.drawable.ic_action_expand_dark);
+            }
+            TextView headerTextView = (TextView) convertView.findViewById(R.id.idExpandableHeaderItem);
+            headerTextView.setText(header);
         }
-        TextView headerTextView = (TextView) convertView.findViewById(R.id.idExpandableHeaderItem);
-        headerTextView.setText(header);
         return convertView;
     }
 
