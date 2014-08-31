@@ -92,10 +92,17 @@ public class MyntraCategory {
 
         private String groupName;
         private List<ProductGroup> childGroups;
+        private boolean isHeader;
 
         public ProductHeadGroup(String groupName, List<ProductGroup> childGroups) {
             this.groupName = groupName;
             this.childGroups = childGroups;
+        }
+
+        public ProductHeadGroup(String groupName, List<ProductGroup> childGroups, boolean isHeader) {
+            this.groupName = groupName;
+            this.childGroups = childGroups;
+            this.isHeader = isHeader;
         }
 
         public String getGroupName() {
@@ -112,6 +119,14 @@ public class MyntraCategory {
 
         public void setChildGroups(List<ProductGroup> childGroups) {
             this.childGroups = childGroups;
+        }
+
+        public boolean isHeader() {
+            return isHeader;
+        }
+
+        public void setHeader(boolean isHeader) {
+            this.isHeader = isHeader;
         }
     }
 
@@ -203,7 +218,7 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
 
-        productHeadGroups.add(new ProductHeadGroup("Footwear", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Footwear", productGroups, false));
 
         ///////////////////////////// Clothing ///////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -295,7 +310,7 @@ public class MyntraCategory {
                 ",\"rows\":96,\"facetField\":[],\"fq\":[\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"real_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true,\"facet\":true}]"
         );
         productGroups.add(productGroup);
-        productHeadGroups.add(new ProductHeadGroup("Clothing", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Clothing", productGroups, false));
 
         //////////////////////////// Accessories /////////////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -376,7 +391,7 @@ public class MyntraCategory {
                 ",\"rows\":96,\"facetField\":[\"Watch_Type_article_attr\",\"Water_Resistance_article_attr\",\"Features_article_attr\",\"Strap_Type_article_attr\",\"Occasion_article_attr\"],\"fq\":[\"count_options_availbale:[1 TO *]\"],\"sort\":[{\"sort_field\":\"count_options_availbale\",\"order_by\":\"desc\"},{\"sort_field\":\"style_store21_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"potential_revenue_male_sort_field\",\"order_by\":\"desc\"},{\"sort_field\":\"global_attr_catalog_add_date\",\"order_by\":\"desc\"}],\"return_docs\":true,\"colour_grouping\":true,\"facet\":true}]"
         );
         productGroups.add(productGroup);
-        productHeadGroups.add(new ProductHeadGroup("Accessories", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Accessories", productGroups, false));
 
         return productHeadGroups;
     }
@@ -478,7 +493,7 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
 
-        productHeadGroups.add(new ProductHeadGroup("Footwear", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Footwear", productGroups, false));
 
         ///////////////////////////// Western Wear  ///////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -571,7 +586,7 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
 
-        productHeadGroups.add(new ProductHeadGroup("Western Wear", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Western Wear", productGroups, false));
 
         //////////////////////////// Ethnic Wear /////////////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -620,7 +635,7 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
 
-        productHeadGroups.add(new ProductHeadGroup("Ethnic Wear", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Ethnic Wear", productGroups, false));
 
         //////////////////////////// Accessories /////////////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -680,7 +695,7 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
 
-        productHeadGroups.add(new ProductHeadGroup("Accessories", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Accessories", productGroups, false));
 
         return productHeadGroups;
     }
@@ -729,7 +744,7 @@ public class MyntraCategory {
         productGroups.add(productGroup);
         */
 
-        productHeadGroups.add(new ProductHeadGroup("Boys Apparel", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Boys Apparel", productGroups, false));
 
         ///////////////////////////// Boys Footwear  ///////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -769,7 +784,7 @@ public class MyntraCategory {
         productGroups.add(productGroup);
         */
 
-        productHeadGroups.add(new ProductHeadGroup("Boys Footwear", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Boys Footwear", productGroups, false));
 
         //////////////////////////// Girls Apparel /////////////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -820,7 +835,7 @@ public class MyntraCategory {
         productGroups.add(productGroup);
         */
 
-        productHeadGroups.add(new ProductHeadGroup("Girls Apparel", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Girls Apparel", productGroups, false));
 
         //////////////////////////// Girls Footwear /////////////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -862,7 +877,7 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
         */
-        productHeadGroups.add(new ProductHeadGroup("Girls Footwear", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Girls Footwear", productGroups, false));
 
         //////////////////////////// Accessories /////////////////////////////
         productGroups = new ArrayList<ProductGroup>();
@@ -916,8 +931,20 @@ public class MyntraCategory {
         );
         productGroups.add(productGroup);
 
-        productHeadGroups.add(new ProductHeadGroup("Accessories", productGroups));
+        productHeadGroups.add(new ProductHeadGroup("Accessories", productGroups, false));
 
+        return productHeadGroups;
+    }
+
+    public static List<ProductHeadGroup> generateMyntraCategoriesForSingleELV(Context context){
+        List<ProductHeadGroup> productHeadGroups = new ArrayList<ProductHeadGroup>();
+
+        productHeadGroups.add(new ProductHeadGroup("Men", new ArrayList<ProductGroup>(), true));
+        productHeadGroups.addAll(generateMyntraMenProductGroups(context));
+        productHeadGroups.add(new ProductHeadGroup("Women", new ArrayList<ProductGroup>(), true));
+        productHeadGroups.addAll(generateMyntraWomenProductGroups(context));
+        productHeadGroups.add(new ProductHeadGroup("Kids", new ArrayList<ProductGroup>(), true));
+        productHeadGroups.addAll(generateMyntraKidsProductGroups(context));
         return productHeadGroups;
     }
 }
