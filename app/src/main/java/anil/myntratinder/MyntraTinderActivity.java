@@ -21,12 +21,12 @@ import anil.myntratinder.models.MyntraCategory;
 import anil.myntratinder.utils.DatabaseHelper;
 
 public class MyntraTinderActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragmentSingleElv.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private NavigationDrawerFragmentSingleElv mNavigationDrawerFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -38,7 +38,7 @@ public class MyntraTinderActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myntra_tinder);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+        mNavigationDrawerFragment = (NavigationDrawerFragmentSingleElv)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
