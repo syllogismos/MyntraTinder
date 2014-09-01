@@ -1,9 +1,12 @@
 package anil.myntratinder.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +57,7 @@ public class ProductListAdapterWithACursor extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View row, Context context, Cursor cursor) {
+    public void bindView(View row, final Context context, Cursor cursor) {
 
         final ImageView productImage = (ImageView)row.findViewById(R.id.productImage);
         TextView productName = (TextView)row.findViewById(R.id.productName);
@@ -86,7 +89,7 @@ public class ProductListAdapterWithACursor extends CursorAdapter {
 
             }
         };
-        Product product = new Product(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID)));
+        final Product product = new Product(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID)));
         product.setProductGroup(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_PRODUCT_GROUP)));
         product.setDiscountedPrice(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DISCOUNTED_PRICE)));
         product.setStyleName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_STYLE_NAME)));
@@ -98,6 +101,15 @@ public class ProductListAdapterWithACursor extends CursorAdapter {
         product.setLiked(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_LIKED)));
 
         imageLoader.displayImage(product.getImageUrl(),productImage, options, listener);
+        productImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://www.myntra.com/" + product.getDreLandingPageUrl();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
+            }
+        });
         productName.setText(product.getStyleName());
         productPrice.setText(product.getDiscountedPrice());
 
