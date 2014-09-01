@@ -144,29 +144,6 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
             }
         });
 
-        /*
-        mDrawerExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long l) {
-                MyntraCategory.ProductHeadGroup productHeadGroup = (MyntraCategory.ProductHeadGroup) mDrawerExpandableListAdapter.getGroup(groupPosition);
-                if (!productHeadGroup.isHeader()) {
-                    if (expandableListView.isGroupExpanded(groupPosition)) {
-                        ImageView imageView = (ImageView) view.findViewById(R.id.expandableHeaderIcon);
-                        imageView.setImageResource(R.drawable.ic_action_expand_dark);
-//                        expandableListView.collapseGroup(groupPosition);
-                    } else {
-                        ImageView imageView = (ImageView) view.findViewById(R.id.expandableHeaderIcon);
-                        imageView.setImageResource(R.drawable.ic_action_collapse_dark);
-//                        expandableListView.expandGroup(groupPosition);
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-*/
-
         mDrawerExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
