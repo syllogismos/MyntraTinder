@@ -11,6 +11,16 @@
         android:clipToPadding="false"
         android:id="@+id/tinder_content">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffff6651"
+            android:text="refresh"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:id="@+id/refreshButton"
+            />
+
         <anil.myntratinder.views.ProductStackView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

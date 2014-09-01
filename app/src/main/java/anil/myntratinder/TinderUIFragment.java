@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -95,6 +96,13 @@ public class TinderUIFragment extends Fragment {
         maxProducts = sharedPreferences.getString(mMaxProductsKey, "1000");
         doInitialize();
 
+        Button refreshButton = (Button) view.findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doInitialize();
+            }
+        });
         mProductStackView.setmProductStackListener(new ProductStackView.ProductStackListener() {
             @Override
             public void onUpdateProgress(boolean positif, float percent, View view) {
