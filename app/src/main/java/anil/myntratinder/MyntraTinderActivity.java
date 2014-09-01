@@ -54,6 +54,7 @@ public class MyntraTinderActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, "men-footwear-casual-shoes"))
+                //.addToBackStack(null)
                 .commit();
     }
 
@@ -71,6 +72,7 @@ public class MyntraTinderActivity extends Activity
         );
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
+                //.addToBackStack(null)
                 .commit();
     }
 
@@ -79,6 +81,7 @@ public class MyntraTinderActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, productGroup.getUniqueGroupLabel()))
+                .addToBackStack(null)
                 .commit();
     }
 
