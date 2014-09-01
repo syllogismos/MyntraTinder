@@ -318,8 +318,9 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
         if (item.getItemId() == R.id.action_example) {
             // Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             Activity myntraActivity = getActivity();
-            View containerView = myntraActivity.findViewById(R.id.navigation_drawer); // todo: get the productCardView directly from here instead of this way of doing it
-            ExpandableListView elv = (ExpandableListView) containerView.findViewById(R.id.expandableListView);
+            View containerView = myntraActivity.findViewById(R.id.container);
+            View navigationDrawerFragment = myntraActivity.findViewById(R.id.navigation_drawer); // todo: get the productCardView directly from here instead of this way of doing it
+            ExpandableListView elv = (ExpandableListView) navigationDrawerFragment.findViewById(R.id.expandableListView);
             if (elv != null){
                 MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) elv.getExpandableListAdapter().getChild(curGroupPosition, curChildPosition);
                 mCallbacks.onMenuItemToGetLikedPictures(productGroup);
