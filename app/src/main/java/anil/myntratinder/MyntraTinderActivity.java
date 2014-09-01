@@ -53,7 +53,7 @@ public class MyntraTinderActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, ""))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, "men-footwear-casual-shoes"))
                 .commit();
     }
 
@@ -71,6 +71,14 @@ public class MyntraTinderActivity extends Activity
         );
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
+                .commit();
+    }
+
+    @Override
+    public void onMenuItemToGetLikedPictures(MyntraCategory.ProductGroup productGroup) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(1, productGroup.getUniqueGroupLabel()))
                 .commit();
     }
 
@@ -137,6 +145,9 @@ public class MyntraTinderActivity extends Activity
 
         private static final String ARG_PRODUCT_GROUP = "product_group";
 
+        private String productGroup;
+        private String sectionNumber;
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -159,10 +170,19 @@ public class MyntraTinderActivity extends Activity
             View rootView = inflater.inflate(R.layout.activity_product_list_view, container, false);
             ListView listView = (ListView) rootView.findViewById(R.id.productList);
             DatabaseHelper db = new DatabaseHelper(getActivity().getApplicationContext());
-            Cursor cursor = db.getLikedProductsFromGroup("men-footwear-casual-shoes");
+            Cursor cursor = db.getLikedProductsFromGroup(productGroup);
             ListAdapter adapter = new ProductListAdapterWithACursor(getActivity(), cursor, false);
             listView.setAdapter(adapter);
             return rootView;
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null){
+                productGroup = getArguments().getString(ARG_PRODUCT_GROUP);
+                sectionNumber = getArguments().getString(ARG_SECTION_NUMBER);
+            }
         }
 
         @Override
