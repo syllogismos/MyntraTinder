@@ -140,7 +140,7 @@ public class ProductsJSONPullParser {
         return products;
     }
 
-    public static List<Product> getProdutsFromFileAndUpdateMaxProducts(Context context, String filename, String groupLabel, String maxProductsKey, SharedPreferences sharedPreferences){
+    public static List<Product> getProdutsFromFileAndUpdateMaxProducts(Context context, String filename, String uniqueGroupLabel, String groupLabel, String maxProductsKey, SharedPreferences sharedPreferences){
         /* todo: check if the we are parsing the json properly. extract extra info for each property if needed
          * http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
          */
@@ -164,7 +164,8 @@ public class ProductsJSONPullParser {
                 JSONArray productObjects = response1.getJSONArray("products");
                 for (int i = 0; i < productObjects.length(); i++) {
                     JSONObject p = productObjects.getJSONObject(i);
-                    product = new Product(groupLabel);
+                    product = new Product(uniqueGroupLabel);
+                    product.setProductGroup(groupLabel);
                     product.setDiscount(p.getString("discount"));
                     product.setPrice(p.getString("price"));
                     product.setStyleId(p.getString("styleid"));

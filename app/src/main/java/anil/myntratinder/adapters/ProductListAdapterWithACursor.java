@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +88,7 @@ public class ProductListAdapterWithACursor extends CursorAdapter {
             }
         };
         final Product product = new Product(cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID)));
-        product.setProductGroup(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_PRODUCT_GROUP)));
+        product.setUniqueProductGroup(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_UNIQUE_PRODUCT_GROUP)));
         product.setDiscountedPrice(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DISCOUNTED_PRICE)));
         product.setStyleName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_STYLE_NAME)));
         product.setDiscount(cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DISCOUNT)));

@@ -30,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // column names
     public static final String KEY_ID = "id";
+    public static final String KEY_UNIQUE_PRODUCT_GROUP = "unique_product_group";
     public static final String KEY_PRODUCT_GROUP = "product_group";
     public static final String KEY_STYLE_NAME = "style_name";
     public static final String KEY_DISCOUNTED_PRICE = "discounted_price";
@@ -49,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // table create statements
     private static final String CREATE_TABLE = "CREATE TABLE "
             + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_UNIQUE_PRODUCT_GROUP + " TEXT,"
             + KEY_PRODUCT_GROUP + " TEXT,"
             + KEY_STYLE_NAME + " TEXT,"
             + KEY_DISCOUNTED_PRICE + " TEXT,"
@@ -94,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_UNIQUE_PRODUCT_GROUP, product.getUniqueProductGroup());
         values.put(KEY_PRODUCT_GROUP, product.getProductGroup());
         values.put(KEY_STYLE_NAME, product.getStyleName());
         values.put(KEY_DISCOUNTED_PRICE, product.getDiscountedPrice());
@@ -119,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (int i = 0; i < length; i++) {
             Product product = products.get(i);
             valuesString += "("
+                     + sqlEscapeString(product.getUniqueProductGroup()) + ","
                      + sqlEscapeString(product.getProductGroup()) + ","
                      + sqlEscapeString(product.getStyleName()) + ","
                      + sqlEscapeString(product.getDiscountedPrice()) + ","
@@ -127,12 +131,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                      + sqlEscapeString(product.getStyleId()) + ","
                      + sqlEscapeString(product.getImageUrl()) + ","
                      + sqlEscapeString(product.getDreLandingPageUrl()) + ","
-                    + String.valueOf(product.getLiked()) + "),";
+                     + String.valueOf(product.getLiked()) + "),";
         }
         Log.e("values being inserted", valuesString);
         if (valuesString.length() > 0) {
             valuesString = valuesString.substring(0, valuesString.length() - 1);
             String SQL_INSERT_OR_IGNORE = "INSERT OR IGNORE INTO " + table + " ("
+                    + KEY_UNIQUE_PRODUCT_GROUP + ","
                     + KEY_PRODUCT_GROUP + ","
                     + KEY_STYLE_NAME + ","
                     + KEY_DISCOUNTED_PRICE + ","
@@ -158,6 +163,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c != null)
             c.moveToFirst();
         Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID))); // fixme: this is wrong, confusion betweet KEY_ID, mId, unique style id from the website
+        product.setUniqueProductGroup(c.getString(c.getColumnIndex(KEY_UNIQUE_PRODUCT_GROUP)));
         product.setProductGroup(c.getString(c.getColumnIndex(KEY_PRODUCT_GROUP)));
         product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
         product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
@@ -184,6 +190,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID)));
+                product.setUniqueProductGroup(c.getString(c.getColumnIndex(KEY_UNIQUE_PRODUCT_GROUP)));
                 product.setProductGroup(c.getString(c.getColumnIndex(KEY_PRODUCT_GROUP)));
                 product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
                 product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
@@ -203,14 +210,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<Product> getProductsFromGroup(String productGroup, int limit){
         String limitString = String.valueOf(limit);
-        return getProducts(TABLE_NAME, KEY_PRODUCT_GROUP, productGroup, limitString);
+        return getProducts(TABLE_NAME, KEY_UNIQUE_PRODUCT_GROUP, productGroup, limitString);
     }
 
     public List<Product> getUnseenProductsFromGroup(String productGroup, int limit) {
         String limitString = String.valueOf(limit);
         List<Product> products = new ArrayList<Product>();
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE "
-                + KEY_PRODUCT_GROUP + " = '" + productGroup
+                + KEY_UNIQUE_PRODUCT_GROUP + " = '" + productGroup
                 + "' AND " + KEY_LIKED + " = 0"
                 + " LIMIT " + limit;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -219,6 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Product product = new Product(c.getInt(c.getColumnIndex(KEY_ID)));
+                product.setUniqueProductGroup(c.getString(c.getColumnIndex(KEY_UNIQUE_PRODUCT_GROUP)));
                 product.setProductGroup(c.getString(c.getColumnIndex(KEY_PRODUCT_GROUP)));
                 product.setDiscountedPrice(c.getString(c.getColumnIndex(KEY_DISCOUNTED_PRICE)));
                 product.setStyleName(c.getString(c.getColumnIndex(KEY_STYLE_NAME)));
@@ -245,7 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // in the above query "id" is our actual column name
         // http://stackoverflow.com/a/7494398/544102
         String selectQuery = "SELECT id _id, * FROM " + TABLE_NAME + " WHERE "
-                + KEY_PRODUCT_GROUP + " = '" + productGroupName
+                + KEY_UNIQUE_PRODUCT_GROUP + " = '" + productGroupName
                 + "' AND " + KEY_LIKED + " = 1";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);

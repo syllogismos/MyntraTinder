@@ -30,6 +30,10 @@ import anil.myntratinder.R;
  */
 public class ProductStackView extends RelativeLayout{
 
+    public BaseAdapter getAdapter() {
+        return mAdapter;
+    }
+
     public interface ProductStackListener{
         void onUpdateProgress(boolean positif, float percent, View view);
         void onCancelled(View beingDragged);

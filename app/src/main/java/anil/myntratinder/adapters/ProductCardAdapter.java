@@ -115,13 +115,13 @@ public class ProductCardAdapter extends BaseAdapter {
         }
     }
 
-    public void initForTinderFragment(String url, String postData, String fileName, String groupLabel, DatabaseHelper db, SharedPreferences sharedPreferences, String maxProductsKey, String startFromKey){
-        List<Product> productsFromDb = db.getUnseenProductsFromGroup(groupLabel, 20);
+    public void initForTinderFragment(String url, String postData, String fileName, String uniqueGroupLabel, String groupLabel, DatabaseHelper db, SharedPreferences sharedPreferences, String maxProductsKey, String startFromKey){
+        List<Product> productsFromDb = db.getUnseenProductsFromGroup(uniqueGroupLabel, 20);
         if (productsFromDb.isEmpty()){
             if (isNetworkAvailable()) {
-                downloadJsonToFileAndUpdateDbWithGivenKeys(url, postData, fileName, groupLabel, db, sharedPreferences, maxProductsKey, startFromKey);
+                downloadJsonToFileAndUpdateDbWithGivenKeys(url, postData, fileName, uniqueGroupLabel, groupLabel, db, sharedPreferences, maxProductsKey, startFromKey);
                 SystemClock.sleep(2000);
-                mItems = db.getUnseenProductsFromGroup(groupLabel, 20);
+                mItems = db.getUnseenProductsFromGroup(uniqueGroupLabel, 20);
             } else {
                 Log.d("product card adapter for tinder fragment", "network is not available");
                 mItems = new ArrayList<Product>();
@@ -132,13 +132,13 @@ public class ProductCardAdapter extends BaseAdapter {
     }
 
     @Background
-    public void downloadJsonToFileAndUpdateDbWithGivenKeys(String url, String postData, String fileName, String groupLabel, DatabaseHelper db, SharedPreferences sharedPreferences, String maxProductsKey, String startFromKey) {
+    public void downloadJsonToFileAndUpdateDbWithGivenKeys(String url, String postData, String fileName, String uniqueGroupLabel, String groupLabel, DatabaseHelper db, SharedPreferences sharedPreferences, String maxProductsKey, String startFromKey) {
         try {
             Downloader.downloadFromUrl(url, postData, mContext.openFileOutput(fileName, Context.MODE_PRIVATE));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        List<Product> productsFromFile = ProductsJSONPullParser.getProdutsFromFileAndUpdateMaxProducts(mContext, fileName, groupLabel, maxProductsKey, sharedPreferences);
+        List<Product> productsFromFile = ProductsJSONPullParser.getProdutsFromFileAndUpdateMaxProducts(mContext, fileName, uniqueGroupLabel, groupLabel, maxProductsKey, sharedPreferences);
         db.insertOrIgnoreProducts(productsFromFile, db.TABLE_NAME);
         int startFrom = sharedPreferences.getInt(startFromKey, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();

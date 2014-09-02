@@ -42,6 +42,17 @@ public class Product {
     private String styleId;
     private String imageUrl;
     private String dreLandingPageUrl;
+    private String uniqueProductGroup;
+    private String productGroup;
+    private int liked;
+
+    public String getUniqueProductGroup() {
+        return uniqueProductGroup;
+    }
+
+    public void setUniqueProductGroup(String uniqueProductGroup) {
+        this.uniqueProductGroup = uniqueProductGroup;
+    }
 
     public String getProductGroup() {
         return productGroup;
@@ -50,9 +61,6 @@ public class Product {
     public void setProductGroup(String productGroup) {
         this.productGroup = productGroup;
     }
-
-    private String productGroup;
-    private int liked;
 
     public int getLiked() {
         return liked;
@@ -104,7 +112,7 @@ public class Product {
     }
 
     public Product(String groupLabel){
-        this.productGroup = groupLabel;
+        this.uniqueProductGroup = groupLabel;
     }
 
     public int getmId() {
