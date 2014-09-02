@@ -73,8 +73,8 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    private int curGroupPosition;
-    private int curChildPosition;
+    private int curGroupPosition=1;
+    private int curChildPosition=0;
 
     public NavigationDrawerFragmentSingleElv() {
     }
