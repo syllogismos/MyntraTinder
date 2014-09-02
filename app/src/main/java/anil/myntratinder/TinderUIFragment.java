@@ -148,7 +148,9 @@ public class TinderUIFragment extends Fragment {
         Log.e("Tinder Fragment: max products", maxProducts);
         ProductCardAdapter mAdapter = ProductCardAdapter_.getInstance_(getActivity());
         String postData = getUpdatedPostData(startFrom);
-        mAdapter.initForTinderFragment(url,postData,mFileName,mUniqueGroupLabel, db, sharedPreferences, mMaxProductsKey, mStartFromKey);
+        // todo: have a helper function that directly takes ProductGroup instead of all its parameters individually
+        // mAdapter.initForTinderFragment(url, ProductGroup, db, sharedPreferences); something like this
+        mAdapter.initForTinderFragment(url,postData,mFileName,mUniqueGroupLabel, mGroupLabel, db, sharedPreferences, mMaxProductsKey, mStartFromKey);
         if (!mAdapter.isEmpty()){
             mProductStackView.setAdapter(mAdapter);
         }
