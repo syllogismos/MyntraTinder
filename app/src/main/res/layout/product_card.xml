@@ -43,6 +43,22 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="20dp"/>
+    <ImageView
+        android:id="@+id/yesicon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/like"
+        android:layout_below="@id/yes"
+        android:layout_alignLeft="@id/yes"
+        />
+    <ImageView
+        android:id="@+id/noicon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/dislike"
+        android:layout_below="@id/no"
+        android:layout_alignRight="@id/no"
+        />
 
     <TextView
         android:layout_width="wrap_content"

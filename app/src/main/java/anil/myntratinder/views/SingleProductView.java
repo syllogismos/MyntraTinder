@@ -1,6 +1,11 @@
 package anil.myntratinder.views;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -36,6 +41,12 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     @ViewById
     TextView actualPrice;
 
+    @ViewById
+    ImageView yesicon;
+
+    @ViewById
+    ImageView noicon;
+
     public Product product;
 
     public SingleProductView(Context context) {
@@ -50,6 +61,8 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        yesicon.setAlpha((float) 0);
+        noicon.setAlpha((float) 0);
         // todo: you can download the picture here or in the getView function of the ProductCardAdapter, for now things work so, i'm happy
     }
 
@@ -57,8 +70,10 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     public void onUpdateProgress(boolean positif, float percent, View view) {
         if (positif) {
             yes.setAlpha(percent);
+            yesicon.setAlpha(percent);
         } else {
             no.setAlpha(percent);
+            noicon.setAlpha(percent);
         }
         // styleName.setAlpha(0);
         // actualPrice.setAlpha(0);
@@ -69,6 +84,8 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     public void onCancelled(View beingDragged) {
         yes.setAlpha(0);
         no.setAlpha(0);
+        yesicon.setAlpha((float) 0);
+        noicon.setAlpha((float) 0);
         styleName.setAlpha(1);
         actualPrice.setAlpha(1);
         discountedPrice.setAlpha(1);
@@ -78,6 +95,8 @@ public class SingleProductView extends RelativeLayout implements ProductStackVie
     public void onChoiceMade(boolean choice, View beingDragged) {
         yes.setAlpha(0);
         no.setAlpha(0);
+        yesicon.setAlpha((float) 0);
+        noicon.setAlpha((float) 0);
         styleName.setAlpha(1);
         actualPrice.setAlpha(1);
         discountedPrice.setAlpha(1);
