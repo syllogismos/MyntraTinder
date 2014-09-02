@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -30,6 +31,8 @@ import java.util.List;
 
 import anil.myntratinder.adapters.MyntraCategoryExpandableListAdapter;
 import anil.myntratinder.models.MyntraCategory;
+import anil.myntratinder.models.Product;
+import anil.myntratinder.views.ProductStackView;
 
 import static anil.myntratinder.models.MyntraCategory.generateMyntraCategoriesForSingleELV;
 
@@ -159,7 +162,7 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
                 selectProductGroup(productGroup);
                 int index = expandableListView.getFlatListPosition(expandableListView.getPackedPositionForChild(groupPosition, childPosition));
                 expandableListView.setItemChecked(index, true);
-                mDrawerListView.setItemChecked(100,true);
+                mDrawerListView.setItemChecked(100, true);
                 return true;
             }
         });
@@ -326,12 +329,19 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
             Activity myntraActivity = getActivity();
             //fixme: get productGroup from container not from curGroup, curChild
             View containerView = myntraActivity.findViewById(R.id.container);
-            View navigationDrawerFragment = myntraActivity.findViewById(R.id.navigation_drawer); // todo: get the productCardView directly from here instead of this way of doing it
-            ExpandableListView elv = (ExpandableListView) navigationDrawerFragment.findViewById(R.id.expandableListView);
-            if (elv != null){
-                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) elv.getExpandableListAdapter().getChild(curGroupPosition, curChildPosition);
+            ProductStackView productStackView = (ProductStackView) containerView.findViewById(R.id.tinder_mProductStack);
+            if (productStackView != null){
+                BaseAdapter adapter = productStackView.getAdapter();
+                Product product = (Product) adapter.getItem(0);
+                MyntraCategory.ProductGroup productGroup = new MyntraCategory.ProductGroup(product.getProductGroup(), product.getUniqueProductGroup(), "", "", "", "", "");
                 mCallbacks.onMenuItemToGetLikedPictures(productGroup);
             }
+//            View navigationDrawerFragment = myntraActivity.findViewById(R.id.navigation_drawer); // todo: get the productCardView directly from here instead of this way of doing it
+//            ExpandableListView elv = (ExpandableListView) navigationDrawerFragment.findViewById(R.id.expandableListView);
+//            if (elv != null){
+//                MyntraCategory.ProductGroup productGroup = (MyntraCategory.ProductGroup) elv.getExpandableListAdapter().getChild(curGroupPosition, curChildPosition);
+//                mCallbacks.onMenuItemToGetLikedPictures(productGroup);
+//            }
             return true;
         }
 
