@@ -53,9 +53,11 @@ public class MyntraTinderActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, "men-footwear-casual-shoes"))
+                .replace(R.id.container, new HomeFragment())
                 //.addToBackStack(null)
                 .commit();
+        onSectionAttached(position+1);
+        restoreActionBar();
     }
 
     @Override
@@ -83,19 +85,17 @@ public class MyntraTinderActivity extends Activity
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, productGroup.getUniqueGroupLabel()))
                 //.addToBackStack(null)
                 .commit();
-        //todo: change mTitle to show the group label also
+        mTitle = productGroup.getGroupLabel();
+        restoreActionBar();
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Home";
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = "Settings";
                 break;
         }
     }
