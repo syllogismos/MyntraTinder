@@ -81,8 +81,9 @@ public class MyntraTinderActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, productGroup.getUniqueGroupLabel()))
-                .addToBackStack(null)
+                //.addToBackStack(null)
                 .commit();
+        //todo: change mTitle to show the group label also
     }
 
     public void onSectionAttached(int number) {
