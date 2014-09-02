@@ -114,12 +114,14 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
+                mDrawerExpandableListView.setItemChecked(0,true);
+                collapseGroupsOfExpandableListView(mDrawerExpandableListView, mDrawerExpandableListAdapter);
             }
         });
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
+                R.layout.drawer_list_item,
+                R.id.list_item_title,
                 new String[]{
                         "Home",
                         "Settings"
@@ -135,6 +137,7 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
         mDrawerExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
+                mDrawerExpandableListView.setItemChecked(0, true);
                 MyntraCategory.ProductHeadGroup productHeadGroup = (MyntraCategory.ProductHeadGroup) mDrawerExpandableListAdapter.getGroup(groupPosition);
                 if (!productHeadGroup.isHeader()) {
                     int len = mDrawerExpandableListAdapter.getGroupCount();
@@ -154,6 +157,9 @@ public class NavigationDrawerFragmentSingleElv extends Fragment {
                 curChildPosition = childPosition;
                 curGroupPosition = groupPosition;
                 selectProductGroup(productGroup);
+                int index = expandableListView.getFlatListPosition(expandableListView.getPackedPositionForChild(groupPosition, childPosition));
+                expandableListView.setItemChecked(index, true);
+                mDrawerListView.setItemChecked(100,true);
                 return true;
             }
         });
