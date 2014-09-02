@@ -23,5 +23,7 @@
         android:id="@+id/expandableListView"
         android:fadeScrollbars="false"
         android:layout_below="@id/listView"
+        android:listSelector="@drawable/expandable_list_selector"
+        android:choiceMode="singleChoice"
         />
 </RelativeLayout>
