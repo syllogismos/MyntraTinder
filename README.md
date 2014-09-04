@@ -3,12 +3,13 @@ Products from a Fashion website showcased in a Tinder like UI.
 
 * Android app that implements tinder ui, based on https://github.com/exctasy2/tinder-card-stack
 * Latest apk build file [here](https://github.com/syllogismos/MyntraTinder/blob/master/app-debug.apk)
-* Current build is pretty decent, I'm pretty happy it logically, UI can be improved.
-## UI
+* Current build is pretty decent, I'm pretty happy with it logically, UI can be improved.  
 
+## UI
 ![Navigation Drawer](http://i.imgur.com/d7o9Ccz.png "Navigation Drawer")
 ![Swipe Right](http://i.imgur.com/FbgLOf4.png "Like")
-![Swipe Left](http://i.imgur.com/sTMeDDr.png "Dislike")
+![Swipe Left](http://i.imgur.com/sTMeDDr.png "Dislike")  
+
 ## Relavent Activities, Fragments, Views, Models, Resources, Layouts and Adapters
 
 ### Activities:
