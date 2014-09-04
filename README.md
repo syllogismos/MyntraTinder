@@ -69,40 +69,44 @@ these into our ExpandableListView.
 
 ## Additional Notes:
 
-* When you select a product category/group in the expandable list view, it queries the database for 20 products from that
+#### Note1:
+When you select a product category/group in the expandable list view, it queries the database for 20 products from that
 category, if the db doesn't even have a single product from that category, it gets new products from the server side, 96 
 at a time and fill the db with new products. And returns 20 new products to the ProductStackAdapter
 
-* Our product categories have 3 levels of hierarchy, but ExpandableListView has only 2 levels, so the top most level, 
+#### Note2:
+Our product categories have 3 levels of hierarchy, but ExpandableListView has only 2 levels, so the top most level, 
 say "Men" is also technically a "Group" with no children, it only behaves as a header to the next two levels in the hierarchy.
-Below is the actual hierarchy of product groups.
-    * Men
-        * Footwear
-            1. Casual Shoes
-            2. Formal Shoes
-        * Accessories
-            1. Watches
-            2. Sunglasses
-    * Women
-        * Footwear
-            1. Heels
-            2. Wedges
-        * Accessories
-            1. Watches
-            2. Sunglasses
+Below is the actual hierarchy of product groups.  
 
-But for our convenience, to put it inside an ExpandableListView, we changed it to below
-    * Men
+* Men
     * Footwear
         1. Casual Shoes
         2. Formal Shoes
     * Accessories
         1. Watches
         2. Sunglasses
-    * Women
+* Women
     * Footwear
         1. Heels
         2. Wedges
     * Accessories
         1. Watches
         2. Sunglasses
+
+But for our convenience, to put it inside an ExpandableListView, we changed it to below  
+
+* Men
+* Footwear
+    1. Casual Shoes
+    2. Formal Shoes
+* Accessories
+    1. Watches
+    2. Sunglasses
+* Women
+* Footwear
+    1. Heels
+    2. Wedges
+* Accessories
+    1. Watches
+    2. Sunglasses
