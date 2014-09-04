@@ -13,59 +13,59 @@ Products from a Fashion website showcased in a Tinder like UI.
 ## Relavent Activities, Fragments, Views, Models, Resources, Layouts and Adapters
 
 ### Activities:
-The main activity is MyntraTinderActivity that is based on the default DrawerLayoutActivity provided
+* **MyntraTinderActivity**: This is the main activity that is based on the default DrawerLayoutActivity provided
 to us in Android Studio.  
-It extends the NavigationDrawerCallbacks from NavigationDrawerFragmentSingleElv to handle click events
+It extends **NavigationDrawerCallbacks** from **NavigationDrawerFragmentSingleElv** to handle click events
 in the drawer fragment.  
 
-* Layout: activity_myntra_tinder.xml
+    * *Layout*: *activity_myntra_tinder.xml*
 
 The rest of the activities in the project are just for testing and trying various things.
 
 ### Fragments:
-* NavigationDrawerFragmentSingleElv: Fragment that implements the navigation drawer, that has a single
-ExpandbleListView where you can find all the product groups, you click on the relavent product group
+* **NavigationDrawerFragmentSingleElv**: Fragment that implements the navigation drawer, that has a single
+*ExpandbleListView* where you can find all the product groups, you click on the relavent product group
 to get products presented to you in the form a Tinder Stack. It also has a list view for things like
 "Home", "Settings" etc.,
-    * Layouts: fragment_navigation_drawer_myntra_tinder_activity_single_elv.xml
-    * Adapters: MyntraCategoryExpandableListAdapter, to populate various product categories to our ExpandableListView
+    * *Layouts*: *fragment_navigation_drawer_myntra_tinder_activity_single_elv.xml*
+    * *Adapters*: **MyntraCategoryExpandableListAdapter**, to populate various product categories to our *ExpandableListView*
 
-* TinderUIFragment: Fragment that has the ProductStackView with in which we showcase a given list of products
+* **TinderUIFragment**: Fragment that has the ProductStackView with in which we showcase a given list of products
 in a tinder stack.  
-    * Layouts: fragment_tinder_ui.xml
-    * Adapters:
+    * *Layouts*: *fragment_tinder_ui.xml*
+    * *Adapters*:
     
-* HomeFragment: Place holder fragment that you can further develop upon to show what ever you want, currently, 
+* **HomeFragment**: Place holder fragment that you can further develop upon to show what ever you want, currently, 
 this fragment shows up when you click ListView items like "Home", "Settings".
-    * Layouts: fragment_home.xml
-    * Adapters:
+    * *Layouts*: *fragment_home.xml*
+    * *Adapters*:
   
-* LikedProductsFragment: Fragment that contains a single ListView that is used to display all the liked products from
-a single product group. This is implemented inside the MyntraTinderActivity
-    * Layouts: activity_product_list_view
-    * Adapters: ProductListAdapterWithACursor, a cursor adapter that takes a cursor obtained from a database
+* **LikedProductsFragment**: Fragment that contains a single ListView that is used to display all the liked products from
+a single product group. This is implemented inside the **MyntraTinderActivity**
+    * *Layouts*: *activity_product_list_view.xml*
+    * *Adapters*: **ProductListAdapterWithACursor**, a cursor adapter that takes a cursor obtained from a database
     operation and fills our listView
     
 ### Views:
-* SingleProductView: View that implements what each Card in the TinderStack looks like, this is what you swipe right 
+* **SingleProductView**: View that implements what each Card in the TinderStack looks like, this is what you swipe right 
 or left to like or dislike a particular product.  
-    * Layouts: product_card.xml
-    * Adapters:
+    * *Layouts*: *product_card.xml*
+    * *Adapters*:
 
-* ProductStackView: View that contains the whole stack, 
-    * Layouts: 
-    * Adapters: ProductCardAdapter, adapter that loads, given list of products in to our tinder stack, you can find
+* **ProductStackView**: View that contains the whole stack, 
+    * *Layouts*: 
+    * *Adapters*: **ProductCardAdapter**, adapter that loads, given list of products in to our tinder stack, you can find
     helper functions inside this adapter and see how we initialize the adapter in various cases.
 
 ### Models:
-* Product: A model that defines a single Product and its parameters
-* MyntraCategory: A model that defines product categories, sub categories etc., and also an helper function to load 
+* **Product**: A model that defines a single Product and its parameters
+* **MyntraCategory**: A model that defines product categories, sub categories etc., and also an helper function to load 
 these into our ExpandableListView.
 
 ### Utils:
-* DatabaseHelper: Helper functions that handle all database operations and our db schema is also defined in this.
-* Downloader: Helper functions to download json, to our phones filesystem, given url, postData and filename
-* ProductsJSONPullParser: Helper functions to parse a given json file and return a list of Products.
+* **DatabaseHelper**: Helper functions that handle all database operations and our db schema is also defined in this.
+* **Downloader**: Helper functions to download json, to our phones filesystem, given url, postData and filename
+* **ProductsJSONPullParser**: Helper functions to parse a given json file and return a list of Products.
 
 ## Additional Notes:
 
