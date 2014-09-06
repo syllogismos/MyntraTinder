@@ -1,6 +1,6 @@
 Products from a Fashion website showcased in a Tinder like UI.
 ==============================================================
-[![Build Status](https://secure.travis-ci.org/syllogismos/MyntraTinder.png?branch=master)](http://travis-ci.org/syllogismos/MyntraTinder)
+[![Build Status](https://secure.travis-ci.org/syllogismos/MyntraTinder.svg)](http://travis-ci.org/syllogismos/MyntraTinder)
 * Android app that implements tinder ui, based on https://github.com/exctasy2/tinder-card-stack
 * Latest apk build file [here](https://github.com/syllogismos/MyntraTinder/blob/master/app-debug.apk)
 * Current build is pretty decent, I'm pretty happy with it logically, UI can be improved.  
