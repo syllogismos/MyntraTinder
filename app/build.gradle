@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "anil.myntratinder"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
@@ -53,5 +53,5 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.0.+@jar'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile 'com.nineoldandroids:library:2.4.0@jar'
-    compile 'com.android.support:support-v4:19.+'
+    compile 'com.android.support:support-v4:19.1.0'
 }
