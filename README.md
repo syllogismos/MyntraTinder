@@ -8,6 +8,10 @@ Products from a Fashion website showcased in a Tinder like UI.
 ## Note:
 Currently the the rest endpoints I used to query for the products are not working any more. Myntra must have updated their rest endpoints. So sadly you can't experience this in all of this gloriousness :D
 
+TODO:
+Use below updated cool REST api, instead of old
+Current REST endpoints: http://developer.myntra.com/search/data/men-casual shoes?start=10&rows=69
+
 ## UI
 ![Navigation Drawer](http://i.imgur.com/d7o9Ccz.png "Navigation Drawer")
 ![Swipe Right](http://i.imgur.com/FbgLOf4.png "Like")
