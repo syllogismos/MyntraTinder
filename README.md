@@ -10,7 +10,7 @@ Currently the the rest endpoints I used to query for the products are not workin
 
 TODO:
 Use below updated cool REST api, instead of old
-Current REST endpoints: http://developer.myntra.com/search/data/men-casual shoes?start=10&rows=69
+Current REST endpoints: http://developer.myntra.com/search/data/men-casual%20shoes?start=10&rows=69
 
 ## UI
 ![Navigation Drawer](http://i.imgur.com/d7o9Ccz.png "Navigation Drawer")
