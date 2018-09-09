@@ -6,7 +6,7 @@ Products from a Fashion website showcased in a Tinder like UI.
 * Current build is pretty decent, I'm pretty happy with it logically, UI can be improved.  
 
 ## Note:
-Currently the the rest endpoints I used to query for the products are not working any more. Myntra must have updated their rest endpoints. So sadly you can't experience this in all of this gloriousness :D
+Currently the rest endpoints I used to query for the products are not working any more. Myntra must have updated their rest endpoints. So sadly you can't experience this in all of this gloriousness :D
 
 TODO:
 Use below updated cool REST api, instead of old
